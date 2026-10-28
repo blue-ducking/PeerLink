@@ -9,94 +9,177 @@
   <link rel="stylesheet" href="/css/dashboard.css">
 </head>
 <body>
-  <header class="site-header">
-    <nav id="main-nav" aria-label="Main Navigation"></nav>
+  <!-- Skillshare-Style Dark Top Bar with Violet Accent -->
+  <header class="site-header dash-dark-header">
+    <div class="dash-nav-inner">
+      <!-- Left: Brand & Browse -->
+      <div class="dash-nav-left">
+        <a href="/dashboard.html" class="dash-brand-logo">peerlink<span class="brand-dot">.</span></a>
+        
+        <button type="button" class="dash-browse-btn" id="btn-browse-toggle" aria-expanded="false" aria-haspopup="true">
+          <span>Browse</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+
+        <a href="/listings.html" class="dash-nav-link">Campus Feed</a>
+      </div>
+
+      <!-- Center: Wide Search Input -->
+      <div class="dash-nav-center">
+        <div class="dash-search-container">
+          <svg class="dash-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="search" id="dash-header-search-input" class="dash-header-search" placeholder="Search skills, tutoring, campus services, peers... (Press Enter)" autocomplete="off">
+        </div>
+      </div>
+
+      <!-- Right: Requests, Bell, Avatar & Violet CTA -->
+      <div class="dash-nav-right">
+        <a href="/requests.html" class="dash-nav-link">My Requests</a>
+
+        <button type="button" class="dash-bell-btn" id="btn-notifications" aria-label="Notifications">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+          </svg>
+          <span class="bell-badge-dot" aria-hidden="true"></span>
+        </button>
+
+        <!-- Circular User Avatar -->
+        <button type="button" class="dash-avatar-btn" id="btn-avatar-toggle" aria-expanded="false" aria-haspopup="true" title="User Menu">
+          <span id="nav-avatar-initials">ST</span>
+        </button>
+
+        <!-- Violet "Offer a Skill +" Primary Button -->
+        <a href="/listings.html" class="dash-cta-btn" id="btn-post-service">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+          <span>Offer a Skill</span>
+        </a>
+
+        <!-- Skillshare-Style Floating Profile Popover Dropdown Card -->
+        <div class="profile-popover-menu" id="profile-popover-menu" role="menu">
+          <div class="popover-header">
+            <div class="popover-avatar-lg">
+              <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#18181B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+            </div>
+            <h3 class="popover-name" id="popover-user-name">Loading Student...</h3>
+            <p class="popover-headline" id="popover-user-headline">Computer Science · 2nd Year</p>
+            <a href="/profile.html" class="popover-btn-profile">View Profile</a>
+          </div>
+
+          <div class="popover-divider"></div>
+
+          <ul class="popover-nav-list">
+            <li class="popover-nav-item">
+              <a href="/requests.html">
+                <span>My Requests</span>
+                <span class="meta-tag" id="popover-requests-count">0</span>
+              </a>
+            </li>
+            <li class="popover-nav-item">
+              <a href="/skills.html">
+                <span>My Skills Catalog</span>
+                <span class="meta-tag" id="popover-skills-count">0</span>
+              </a>
+            </li>
+            <li class="popover-nav-item">
+              <a href="/profile.html">
+                <span>Verification</span>
+                <span class="popover-status-badge" id="popover-verification-badge">● Verified</span>
+              </a>
+            </li>
+            <li class="popover-nav-item">
+              <a href="/ai.html">
+                <span>AI Campus Matchmaker</span>
+              </a>
+            </li>
+          </ul>
+
+          <div class="popover-divider"></div>
+
+          <button type="button" class="popover-logout-btn" id="popover-btn-logout">Sign Out</button>
+        </div>
+      </div>
+    </div>
   </header>
 
-  <main class="main-content">
-    <section class="dashboard-hero">
-      <h1 id="dashboard-greeting" class="dashboard-greeting">Good day, Student.</h1>
-      <p style="font-size: 1.15rem; color: var(--text-secondary); margin-bottom: 1.5rem;">What are you looking for?</p>
+  <!-- Main Dashboard Surface: Left Sidebar + Right 3-Column Card Grid -->
+  <main class="dash-layout-container">
+    
+    <!-- Left Sidebar: Campus Category Filter -->
+    <aside class="dash-sidebar">
+      <div>
+        <h2 class="category-nav-heading">All Campus Categories</h2>
+        <ul class="category-nav-list" id="category-nav-list">
+          <li class="category-nav-item active">
+            <button type="button" data-category-id="all">
+              <span>All Offerings</span>
+              <span class="meta-tag" id="count-all-categories">5</span>
+            </button>
+          </li>
+          <!-- Dynamic categories populated by dashboard.js -->
+        </ul>
+      </div>
 
-      <div class="dashboard-search-wrap">
-        <label for="dashboard-quick-search" class="visually-hidden" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0);">Search campus services</label>
-        <input type="search" id="dashboard-quick-search" class="dashboard-search-input" placeholder="Search for skills, tutoring, or campus services... (Press Enter)">
+      <!-- Quick Student Activity Summary Card -->
+      <div class="sidebar-activity-box">
+        <h3 class="sidebar-activity-title">Your Activity</h3>
+        <div class="sidebar-stat-row">
+          <span>Skills Listed</span>
+          <span class="sidebar-stat-val" id="sidebar-stat-skills">0</span>
+        </div>
+        <div class="sidebar-stat-row">
+          <span>Active Offerings</span>
+          <span class="sidebar-stat-val" id="sidebar-stat-listings">0</span>
+        </div>
+        <div class="sidebar-stat-row">
+          <span>Service Requests</span>
+          <span class="sidebar-stat-val" id="sidebar-stat-requests">0</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Right Main Column: Title, Section Header & 3-Column Cards -->
+    <section class="dash-main-content">
+      <h1 class="dash-page-title" id="dash-greeting-title">All Campus Offerings</h1>
+      <p class="dash-page-desc">Connect with verified student peers for tutoring, lab assistance, design, and coursework collaboration.</p>
+
+      <!-- Section Header with "View All" Button -->
+      <div class="dash-section-header">
+        <h2 class="dash-section-title" id="current-category-title">Popular Offerings</h2>
+        <a href="/listings.html" class="btn-view-all-outline">View All</a>
+      </div>
+
+      <!-- 3-Column Visual Card Grid -->
+      <div class="cards-grid-3col" id="cards-grid">
+        <div class="dash-empty-state">
+          <p class="dash-empty-text">Loading campus offerings...</p>
+        </div>
       </div>
     </section>
 
-    <!-- Activity Strip -->
-    <section class="activity-section">
-      <h2 class="activity-heading">Your Campus Activity</h2>
-      <div class="activity-strip">
-        <div class="activity-metric">
-          <span id="stat-skills" class="metric-number">-</span>
-          <span class="metric-label">Skills Listed</span>
-        </div>
-        <div class="activity-metric">
-          <span id="stat-listings" class="metric-number">-</span>
-          <span class="metric-label">Service Offerings</span>
-        </div>
-        <div class="activity-metric">
-          <span id="stat-requests" class="metric-number">-</span>
-          <span class="metric-label">Active Requests</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- Recent Campus Services -->
-    <section style="margin-bottom: var(--space-xxl);">
-      <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: var(--space-xs);">
-        <h2>Campus Service Offerings</h2>
-        <a href="/listings.html" class="text-link">Browse all offerings →</a>
-      </div>
-      <p class="meta-secondary">Recent peer skills and tutoring available from students.</p>
-
-      <ul id="recent-listings-list" class="editorial-list">
-        <li class="editorial-list-item"><p class="meta-secondary">Loading offerings...</p></li>
-      </ul>
-    </section>
-
-    <!-- Explore Modules -->
-    <section>
-      <h2>Explore PeerLink</h2>
-      <ul class="explore-grid">
-        <li class="explore-item">
-          <a href="/profile.html">
-            <h3 class="explore-item-title">Profile & Identity</h3>
-            <p class="explore-item-desc">Manage your bio, department, and campus verification status.</p>
-          </a>
-        </li>
-        <li class="explore-item">
-          <a href="/skills.html">
-            <h3 class="explore-item-title">Skills Catalog</h3>
-            <p class="explore-item-desc">Tag your capabilities from programming to academic tutoring.</p>
-          </a>
-        </li>
-        <li class="explore-item">
-          <a href="/listings.html">
-            <h3 class="explore-item-title">Service Offerings</h3>
-            <p class="explore-item-desc">Post a service to assist peers with labs, design, or coursework.</p>
-          </a>
-        </li>
-        <li class="explore-item">
-          <a href="/requests.html">
-            <h3 class="explore-item-title">Requests & Approvals</h3>
-            <p class="explore-item-desc">Manage incoming peer requests and track sent submissions.</p>
-          </a>
-        </li>
-        <li class="explore-item">
-          <a href="/ai.html">
-            <h3 class="explore-item-title">AI Assistant</h3>
-            <p class="explore-item-desc">Natural language matchmaker extension point (Teammate 5).</p>
-          </a>
-        </li>
-      </ul>
-    </section>
   </main>
 
+  <!-- Modern Clean Footer -->
   <footer class="site-footer">
     <div class="footer-inner">
-      <p>© 2026 PeerLink Platform · University Capstone Prototype</p>
+      <p>© 2026 PeerLink · Closed-Campus Peer Collaboration Network</p>
+      <ul class="footer-links">
+        <li><a href="/listings.html">Browse Listings</a></li>
+        <li><a href="/skills.html">Skills Catalog</a></li>
+        <li><a href="/requests.html">Service Requests</a></li>
+        <li><a href="/ai.html">AI Matchmaker</a></li>
+      </ul>
     </div>
   </footer>
 
