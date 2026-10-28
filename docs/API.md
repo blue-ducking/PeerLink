@@ -71,6 +71,11 @@ This specification details all endpoints implemented in the PeerLink core protot
 - **Headers**: `Authorization: Bearer <token>`
 - **Response (200 OK)**: Returns `{ user, profile }`.
 
+### Administrator List Users
+`GET /api/auth/users`
+- **Headers**: Requires `role: admin`.
+- **Response (200 OK)**: Returns list of all campus students and accounts with profile details and verification status.
+
 ### Administrator Student Verification
 `PATCH /api/auth/users/:id/verify`
 - **Headers**: Requires `role: admin`.

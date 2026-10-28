@@ -36,6 +36,9 @@ function updateNavigation(activeKey = '') {
 
         <!-- Right: Requests, Notifications, Avatar & Violet CTA -->
         <div class="dash-nav-right">
+          ${user?.role === 'admin' ? `
+            <a href="/admin.html" class="dash-nav-link ${activeKey === 'admin' ? 'active' : ''}" style="color: #9D8DE2; font-weight: 700;">Admin Console</a>
+          ` : ''}
           <a href="/requests.html" class="dash-nav-link ${activeKey === 'requests' ? 'active' : ''}">My Requests</a>
 
           <button type="button" class="dash-bell-btn" id="btn-notifications" aria-label="Notifications" title="Notifications">
@@ -77,6 +80,14 @@ function updateNavigation(activeKey = '') {
             <div class="popover-divider"></div>
 
             <ul class="popover-nav-list">
+              ${user?.role === 'admin' ? `
+                <li class="popover-nav-item">
+                  <a href="/admin.html" class="${activeKey === 'admin' ? 'active' : ''}" style="color: #6366F1; font-weight: 600;">
+                    <span>🛡️ Student Verification</span>
+                    <span class="meta-tag" style="background: rgba(99, 102, 241, 0.15); color: #6366F1; font-weight: 700;">ADMIN</span>
+                  </a>
+                </li>
+              ` : ''}
               <li class="popover-nav-item">
                 <a href="/requests.html">
                   <span>My Requests</span>
@@ -183,9 +194,13 @@ function updateNavigation(activeKey = '') {
           if (initialsEl) initialsEl.textContent = userInitials;
           if (popoverNameEl) popoverNameEl.textContent = profile.name || currentUser.university_id;
           if (popoverHeadlineEl) {
-            const dept = profile.department || 'Student';
-            const year = profile.year ? `Year ${profile.year}` : 'Undergrad';
-            popoverHeadlineEl.textContent = `${dept} · ${year}`;
+            if (currentUser.role === 'admin') {
+              popoverHeadlineEl.textContent = 'Platform Administrator';
+            } else {
+              const dept = profile.department || 'Student';
+              const year = profile.year ? `Year ${profile.year}` : 'Undergrad';
+              popoverHeadlineEl.textContent = `${dept} · ${year}`;
+            }
           }
           if (popoverBadgeEl) {
             popoverBadgeEl.textContent = currentUser.verification_status === 'VERIFIED' ? '● Verified' : '● Pending';

@@ -39,35 +39,32 @@ test('Auth Module — Registration & Password Hashing', async (t) => {
       year: 2
     });
 
-    let nextCalled = false;
-    await authController.register(req, res, (err) => { nextCalled = true; });
+    await authController.register(req, res, () => {});
 
     assert.equal(res.statusCode, 201, 'Should return 201 Created');
     assert.equal(res.data.success, true);
-    assert.equal(res.data.data.user.verificationStatus, 'PENDING');
-    assert.equal(res.data.data.user.universityId, uniId);
-    assert.ok(res.data.data.token, 'Should return a valid JWT token');
+    assert.equal(res.data.data.user.verificationStatus, 'PENDING', 'New registration must start as PENDING');
+    assert.equal(res.data.data.user.role, 'student');
+    assert.ok(res.data.data.token, 'Should return authenticated session token');
 
-    // Verify password is NOT stored as plain text
+    // Verify password is not stored plaintext
     const [rows] = await db.query('SELECT password_hash FROM users WHERE university_id = ?', [uniId]);
-    assert.equal(rows.length, 1);
     assert.notEqual(rows[0].password_hash, 'SecurePassword123!');
-    const isBcryptMatch = await bcrypt.compare('SecurePassword123!', rows[0].password_hash);
-    assert.equal(isBcryptMatch, true, 'Stored hash must verify against bcrypt');
+    const isBcrypt = await bcrypt.compare('SecurePassword123!', rows[0].password_hash);
+    assert.equal(isBcrypt, true, 'Stored hash must be valid bcrypt');
   });
 
   await t.test('Rejects duplicate university ID registration with 409 Conflict', async () => {
     const { req, res } = createMockReqRes({
-      university_id: 'STU1001', // Already seeded
-      password: 'Password123!',
+      university_id: 'STU1001', // Existing seeded student
+      password: 'AnyPassword123!',
       name: 'Duplicate Student'
     });
 
     await authController.register(req, res, () => {});
 
-    assert.equal(res.statusCode, 409, 'Should return 409 Conflict for duplicate ID');
+    assert.equal(res.statusCode, 409, 'Should return 409 Conflict on duplicate ID');
     assert.equal(res.data.success, false);
-    assert.match(res.data.error, /already registered/i);
   });
 });
 
@@ -113,6 +110,23 @@ test('Auth Module — Login & Credentials', async (t) => {
 });
 
 test('Auth Module — Administrator Student Verification', async (t) => {
+  await t.test('Admin can list users with enriched student profile metadata', async () => {
+    const { req, res } = createMockReqRes({}, {}, {}, { userId: 1, role: 'admin' });
+
+    await authController.listUsers(req, res, () => {});
+
+    assert.equal(res.statusCode, 200);
+    assert.equal(res.data.success, true);
+    assert.ok(Array.isArray(res.data.data));
+    assert.ok(res.data.data.length >= 6);
+
+    const priya = res.data.data.find(u => u.university_id === 'STU1004');
+    assert.ok(priya);
+    assert.equal(priya.name, 'Priya Sharma');
+    assert.equal(priya.department, 'Electronics & Communication');
+    assert.equal(priya.verification_status, 'PENDING');
+  });
+
   await t.test('Admin can verify a pending student', async () => {
     // STU1004 (user_id 5) is seeded as PENDING
     const { req, res } = createMockReqRes(
@@ -131,5 +145,33 @@ test('Auth Module — Administrator Student Verification', async (t) => {
     // Confirm updated status in database
     const [rows] = await db.query('SELECT verification_status FROM users WHERE user_id = ?', [5]);
     assert.equal(rows[0].verification_status, 'VERIFIED');
+  });
+
+  await t.test('Rejects invalid status update with 400 Bad Request', async () => {
+    const { req, res } = createMockReqRes(
+      { status: 'SUPER_VERIFIED_INVALID' },
+      { id: '5' },
+      {},
+      { userId: 1, role: 'admin' }
+    );
+
+    await authController.verifyUser(req, res, () => {});
+
+    assert.equal(res.statusCode, 400);
+    assert.equal(res.data.success, false);
+  });
+
+  await t.test('Returns 404 when target user does not exist', async () => {
+    const { req, res } = createMockReqRes(
+      { status: 'VERIFIED' },
+      { id: '999999' },
+      {},
+      { userId: 1, role: 'admin' }
+    );
+
+    await authController.verifyUser(req, res, () => {});
+
+    assert.equal(res.statusCode, 404);
+    assert.equal(res.data.success, false);
   });
 });

@@ -238,12 +238,22 @@ async function verifyUser(req, res, next) {
 }
 
 /**
- * List all users (Administrator tool for review).
+ * List all users (Administrator tool for review & verification).
  */
 async function listUsers(req, res, next) {
   try {
-    const [rows] = await db.query('SELECT user_id, university_id, role, verification_status, created_at FROM users');
-    return res.status(200).json({ success: true, data: rows });
+    const [users] = await db.query('SELECT user_id, university_id, role, verification_status, created_at FROM users');
+    const [profiles] = await db.query('SELECT * FROM student_profiles');
+    const profileMap = new Map((profiles || []).map(p => [p.user_id, p]));
+
+    const data = users.map(u => ({
+      ...u,
+      name: profileMap.get(u.user_id)?.name || u.university_id,
+      department: profileMap.get(u.user_id)?.department || 'Student',
+      year: profileMap.get(u.user_id)?.year || 1
+    }));
+
+    return res.status(200).json({ success: true, count: data.length, data });
   } catch (err) {
     next(err);
   }

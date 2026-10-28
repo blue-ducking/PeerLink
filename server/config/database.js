@@ -162,6 +162,15 @@ async function query(sql, params = []) {
       return [[], []];
     }
 
+    // Direct student profiles query
+    if (/FROM student_profiles/i.test(normalizedSql) && !/JOIN/i.test(normalizedSql)) {
+      if (/WHERE.*user_id\s*=\s*\?/i.test(normalizedSql)) {
+        const match = mockDb.student_profiles.find(p => p.user_id === Number(params[0]));
+        return [match ? [{ ...match }] : [], []];
+      }
+      return [[...mockDb.student_profiles], []];
+    }
+
     // Categories
     if (/FROM categories/i.test(normalizedSql)) {
       return [[...mockDb.categories], []];

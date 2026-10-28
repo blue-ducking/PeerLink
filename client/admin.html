@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Verification — PeerLink Admin</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+  <!-- Global Unified Skillshare-Style Dark Header with Violet Accent -->
+  <header class="site-header">
+    <nav id="main-nav" aria-label="Main Navigation"></nav>
+  </header>
+
+  <!-- Admin Verification Surface -->
+  <main class="admin-layout-container">
+    
+    <!-- Top Header -->
+    <header>
+      <div class="admin-header-pill">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+        </svg>
+        <span>Campus Administration · Access Control</span>
+      </div>
+      <h1 class="admin-page-title">Student Verification Management</h1>
+      <p class="admin-page-desc">
+        Review pending campus registrations, verify student identity, and govern access to PeerLink's peer-to-peer service exchange.
+      </p>
+    </header>
+
+    <!-- Metrics Cards Grid -->
+    <section class="admin-stats-grid" aria-label="Verification Metrics">
+      <div class="admin-stat-card admin-stat-pending">
+        <div class="admin-stat-label">
+          <span>Pending Review</span>
+          <span style="font-size: 1rem;">⏳</span>
+        </div>
+        <div class="admin-stat-val" id="stat-pending">-</div>
+      </div>
+
+      <div class="admin-stat-card admin-stat-verified">
+        <div class="admin-stat-label">
+          <span>Verified Students</span>
+          <span style="font-size: 1rem;">✓</span>
+        </div>
+        <div class="admin-stat-val" id="stat-verified">-</div>
+      </div>
+
+      <div class="admin-stat-card admin-stat-rejected">
+        <div class="admin-stat-label">
+          <span>Rejected Accounts</span>
+          <span style="font-size: 1rem;">✕</span>
+        </div>
+        <div class="admin-stat-val" id="stat-rejected">-</div>
+      </div>
+
+      <div class="admin-stat-card">
+        <div class="admin-stat-label">
+          <span>Total Registered</span>
+          <span style="font-size: 1rem;">👥</span>
+        </div>
+        <div class="admin-stat-val" id="stat-total">-</div>
+      </div>
+    </section>
+
+    <!-- Toolbar: Tabs & Search -->
+    <section class="admin-toolbar" aria-label="User Filter Controls">
+      <ul class="admin-tabs-list" role="tablist">
+        <li>
+          <button type="button" class="admin-tab-btn" data-filter="PENDING" role="tab" aria-selected="false">
+            <span>Pending Review</span>
+            <span class="admin-tab-count" id="tab-count-pending">0</span>
+          </button>
+        </li>
+        <li>
+          <button type="button" class="admin-tab-btn active" data-filter="ALL" role="tab" aria-selected="true">
+            <span>All Accounts</span>
+            <span class="admin-tab-count" id="tab-count-all">0</span>
+          </button>
+        </li>
+        <li>
+          <button type="button" class="admin-tab-btn" data-filter="VERIFIED" role="tab" aria-selected="false">
+            <span>Verified</span>
+            <span class="admin-tab-count" id="tab-count-verified">0</span>
+          </button>
+        </li>
+        <li>
+          <button type="button" class="admin-tab-btn" data-filter="REJECTED" role="tab" aria-selected="false">
+            <span>Rejected</span>
+            <span class="admin-tab-count" id="tab-count-rejected">0</span>
+          </button>
+        </li>
+      </ul>
+
+      <div class="admin-search-box">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#71717A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="search" id="admin-search-input" placeholder="Search by name, ID, or department..." autocomplete="off">
+      </div>
+    </section>
+
+    <!-- Students Verification Table / Rows -->
+    <section>
+      <div class="admin-users-list" id="admin-users-list" aria-live="polite">
+        <div class="admin-empty-state">
+          <p>Loading registered campus students...</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Interactive Action Toast -->
+  <div class="admin-toast-banner" id="admin-toast" role="status" aria-live="polite">
+    <span id="toast-message">Verification updated</span>
+  </div>
+
+  <!-- Standard Clean Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p>© 2026 PeerLink Platform · University Administration Console</p>
+      <ul class="footer-links">
+        <li><a href="/dashboard.html">Dashboard</a></li>
+        <li><a href="/listings.html">Offerings</a></li>
+        <li><a href="/skills.html">Skills Catalog</a></li>
+        <li><a href="/requests.html">Service Requests</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/admin.js"></script>
+</body>
+</html>
