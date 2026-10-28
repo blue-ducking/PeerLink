@@ -55,7 +55,7 @@ function updateNavigation(activeKey = '') {
 
   navContainer.innerHTML = `
     <div class="nav-inner">
-      <a href="/index.html" class="nav-brand">PeerLink</a>
+      <a href="/index.html" class="nav-brand">peerlink<span class="brand-dot">.</span></a>
       <ul class="nav-links">
         ${linksHtml}
       </ul>

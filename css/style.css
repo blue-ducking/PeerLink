@@ -6,25 +6,34 @@
 @import url('https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 
 :root {
-  /* Surface & Canvas */
+  /* Surface & Canvas Tokens */
   --neutral-bg: #f8fafc;
   --neutral-surface: #ffffff;
-  --neutral-subtle: #f1f5f9;
+  --neutral-subtle: #f4f4f5;
 
-  /* Typography Colors */
-  --text-primary: #0f172a;
-  --text-secondary: #475569;
-  --text-muted: #64748b;
+  /* PeerLink Signature Brand Palette (from Login / Deel Reference) */
+  --brand-lilac: #b5a5ec;
+  --brand-lilac-facet: #9d8de2;
+  --brand-lilac-subtle: #f0edfb;
+  --brand-lilac-border: #d6cef8;
+  --brand-yellow: #f6d049;
+  --brand-yellow-hover: #fde047;
+  --brand-yellow-subtle: #fef9c3;
+
+  /* Typography Colors (High-contrast slate) */
+  --text-primary: #18181b;
+  --text-secondary: #52525b;
+  --text-muted: #71717a;
   --text-inverse: #ffffff;
 
   /* Hairline Borders & Rules */
-  --border-subtle: #e2e8f0;
-  --border-strong: #cbd5e1;
-  --border-focus: #0f172a;
+  --border-subtle: #e4e4e7;
+  --border-strong: #d4d4d8;
+  --border-focus: #18181b;
 
   /* Primary Brand & Interactivity */
-  --primary: #1e293b;
-  --primary-hover: #0f172a;
+  --primary: #18181b;
+  --primary-hover: #27272a;
   --accent: #2563eb;
   --accent-hover: #1d4ed8;
 
@@ -44,6 +53,9 @@
   --radius-sm: 4px;
   --radius-md: 6px;
   --radius-lg: 8px;
+  --radius-card: 20px;
+
+  --shadow-card: 0 20px 40px -15px rgba(30, 27, 75, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.04);
 
   --space-xs: 4px;
   --space-sm: 8px;
@@ -82,9 +94,9 @@ body {
   background-color: var(--neutral-bg);
 }
 
-/* Selection and Scrollbar Craft-floor requirements */
+/* Selection and Scrollbar Craft-floor requirements (themed from lilac & deep slate) */
 ::selection {
-  background-color: #e2e8f0;
+  background-color: var(--brand-lilac-border);
   color: var(--text-primary);
 }
 
@@ -96,11 +108,11 @@ body {
   background: var(--neutral-bg);
 }
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: #c8beef;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: var(--brand-lilac-facet);
 }
 
 /* Typography Hierarchy */
@@ -165,28 +177,34 @@ a:hover {
 }
 
 .nav-brand {
-  font-weight: 700;
-  font-size: 1.15rem;
-  letter-spacing: -0.02em;
+  font-family: var(--font-family);
+  font-weight: 800;
+  font-size: 1.25rem;
+  letter-spacing: -0.035em;
   color: var(--text-primary);
   display: inline-flex;
-  align-items: center;
-  gap: var(--space-xs);
+  align-items: baseline;
+  gap: 1px;
+}
+
+.nav-brand .brand-dot {
+  color: var(--brand-yellow);
 }
 
 .nav-links {
   display: flex;
   list-style: none;
-  gap: var(--space-md);
+  gap: var(--space-xs);
   align-items: center;
 }
 
 .nav-link {
   font-size: 0.9rem;
   color: var(--text-secondary);
-  padding: 6px 10px;
+  padding: 6px 12px;
   border-radius: var(--radius-md);
   transition: all 0.15s ease;
+  font-weight: 500;
 }
 
 .nav-link:hover {
@@ -197,7 +215,7 @@ a:hover {
 .nav-link.active {
   color: var(--text-primary);
   font-weight: 600;
-  background-color: var(--neutral-subtle);
+  background-color: var(--brand-lilac-subtle);
 }
 
 .nav-user-meta {

@@ -20,7 +20,7 @@
           <a href="/index.html" class="auth-brand-logo">peerlink<span class="brand-dot">.</span></a>
         </div>
 
-        <!-- Larger, Clean Desk Illustration without AVIS / Headspace pills -->
+        <!-- Clean Desk Illustration from Deel reference -->
         <div class="hero-illustration-wrapper" aria-hidden="true">
           <svg class="hero-svg" viewBox="0 0 540 360" fill="none" xmlns="http://www.w3.org/2000/svg">
             <!-- Circular Spotlight Backdrop -->
@@ -72,7 +72,7 @@
           </svg>
         </div>
 
-        <!-- Editorial Content taken directly from index.html -->
+        <!-- Editorial Content from index.html -->
         <div class="hero-content">
           <h1 class="hero-headline">
             Your campus.<br>
@@ -85,52 +85,126 @@
         </div>
       </section>
 
-      <!-- Right Column: Floating White Login Card -->
+      <!-- Right Column: Floating White Auth Box that expands on Sign Up -->
       <section class="auth-card-column">
-        <div class="login-card">
-          <h2 class="card-title">Log in</h2>
+        <div class="auth-card" id="auth-card">
 
-          <form id="login-form">
-            <!-- University ID / Email Field -->
-            <div class="input-card-group">
-              <label for="university-id" class="input-inner-label">University ID / Campus Email</label>
-              <input type="text" id="university-id" class="input-inner-field" placeholder="e.g. STU1001" required autocomplete="username" autofocus>
-            </div>
+          <!-- 1. Log In Panel -->
+          <div class="auth-panel is-visible" id="panel-login">
+            <h2 class="card-title">Log in</h2>
 
-            <!-- Password Field with Show/Hide Eye toggle -->
-            <div class="input-card-group input-with-action">
-              <div class="input-text-wrapper">
-                <label for="password" class="input-inner-label">Password</label>
-                <input type="password" id="password" class="input-inner-field" placeholder="••••••••••••" required autocomplete="current-password">
+            <form id="login-form">
+              <!-- University ID / Email Field -->
+              <div class="input-card-group">
+                <label for="university-id" class="input-inner-label">University ID / Campus Email</label>
+                <input type="text" id="university-id" class="input-inner-field" placeholder="e.g. STU1001" required autocomplete="username" autofocus>
               </div>
-              <button type="button" class="btn-toggle-password" id="toggle-password" aria-label="Toggle password visibility">
-                <!-- Eye SVG Icon -->
-                <svg id="eye-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                  <circle cx="12" cy="12" r="3"></circle>
-                </svg>
-              </button>
+
+              <!-- Password Field with Show/Hide Eye toggle -->
+              <div class="input-card-group input-with-action">
+                <div class="input-text-wrapper">
+                  <label for="password" class="input-inner-label">Password</label>
+                  <input type="password" id="password" class="input-inner-field" placeholder="••••••••••••" required autocomplete="current-password">
+                </div>
+                <button type="button" class="btn-toggle-password" id="toggle-password" aria-label="Toggle password visibility">
+                  <svg id="eye-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                  </svg>
+                </button>
+              </div>
+
+              <div class="forgot-password-row">
+                <a href="#" id="forgot-password-link" class="link-forgot-password">Forgot password?</a>
+              </div>
+
+              <div id="login-feedback" class="form-feedback" role="alert" aria-live="polite"></div>
+
+              <button type="submit" id="login-btn" class="btn-card-submit">Log In</button>
+            </form>
+
+            <div class="card-bottom-toggle">
+              Need to create an account? <button type="button" class="link-toggle" id="btn-goto-signup">Sign Up</button>
             </div>
 
-            <div class="forgot-password-row">
-              <a href="#" id="forgot-password-link" class="link-forgot-password">Forgot password?</a>
+            <!-- Quick Demo Credentials Helper Bar -->
+            <div class="demo-quick-bar">
+              <span class="demo-label">Demo:</span>
+              <button type="button" class="demo-pill" id="demo-student-btn" title="Autofill verified student account">Student (STU1001)</button>
+              <button type="button" class="demo-pill" id="demo-admin-btn" title="Autofill administrator account">Admin (ADMIN001)</button>
+            </div>
+          </div>
+
+          <!-- 2. Sign Up Panel (Expands Card Bigger) -->
+          <div class="auth-panel is-hidden" id="panel-register">
+            <h2 class="card-title">Create account</h2>
+            <p class="card-subtitle">Register using your University ID to connect with campus peers.</p>
+
+            <form id="register-form">
+              <!-- University ID Field -->
+              <div class="input-card-group">
+                <label for="reg-university-id" class="input-inner-label">University ID</label>
+                <input type="text" id="reg-university-id" class="input-inner-field" placeholder="e.g. STU1006" required autocomplete="username">
+              </div>
+
+              <!-- Full Name Field -->
+              <div class="input-card-group">
+                <label for="reg-name" class="input-inner-label">Full Name</label>
+                <input type="text" id="reg-name" class="input-inner-field" placeholder="e.g. Maya Patel" required autocomplete="name">
+              </div>
+
+              <!-- Department & Year (2-column Row) -->
+              <div class="input-card-row">
+                <div class="input-card-group">
+                  <label for="reg-dept" class="input-inner-label">Department / Major</label>
+                  <input type="text" id="reg-dept" class="input-inner-field" placeholder="e.g. Computer Science">
+                </div>
+                <div class="input-card-group">
+                  <label for="reg-year" class="input-inner-label">Year of Study</label>
+                  <select id="reg-year" class="input-inner-field select-field">
+                    <option value="1">1st Year</option>
+                    <option value="2">2nd Year</option>
+                    <option value="3">3rd Year</option>
+                    <option value="4">4th Year</option>
+                    <option value="5">Graduate</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Password Field with Show/Hide toggle -->
+              <div class="input-card-group input-with-action">
+                <div class="input-text-wrapper">
+                  <label for="reg-password" class="input-inner-label">Password</label>
+                  <input type="password" id="reg-password" class="input-inner-field" placeholder="At least 6 characters" required autocomplete="new-password">
+                </div>
+                <button type="button" class="btn-toggle-password" id="reg-toggle-password" aria-label="Toggle password visibility">
+                  <svg id="reg-eye-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                  </svg>
+                </button>
+              </div>
+
+              <!-- Confirm Password Field -->
+              <div class="input-card-group">
+                <label for="reg-confirm-password" class="input-inner-label">Confirm Password</label>
+                <input type="password" id="reg-confirm-password" class="input-inner-field" placeholder="Repeat your password" required autocomplete="new-password">
+              </div>
+
+              <div id="register-feedback" class="form-feedback" role="alert" aria-live="polite"></div>
+
+              <button type="submit" id="register-btn" class="btn-card-submit">Create Student Account →</button>
+            </form>
+
+            <div class="card-bottom-toggle">
+              Already have an account? <button type="button" class="link-toggle" id="btn-goto-login">Log In</button>
             </div>
 
-            <div id="login-feedback" class="form-feedback" role="alert" aria-live="polite"></div>
-
-            <button type="submit" id="login-btn" class="btn-card-submit">Log In</button>
-          </form>
-
-          <div class="card-bottom-signup">
-            Need to create an account? <a href="/register.html" class="link-signup">Sign Up</a>
+            <div class="verification-note-box">
+              <strong>Verification Note:</strong> Newly registered student accounts begin in <code>PENDING</code> status until verified by campus administration.
+            </div>
           </div>
 
-          <!-- Quick Demo Credentials Helper Bar -->
-          <div class="demo-quick-bar">
-            <span class="demo-label">Demo:</span>
-            <button type="button" class="demo-pill" id="demo-student-btn" title="Autofill verified student account">Student (STU1001)</button>
-            <button type="button" class="demo-pill" id="demo-admin-btn" title="Autofill administrator account">Admin (ADMIN001)</button>
-          </div>
         </div>
       </section>
     </div>
@@ -139,10 +213,10 @@
   <!-- Dialog for Forgot Password helper -->
   <dialog id="forgot-password-modal" class="auth-info-modal">
     <div class="modal-header">
-      <h3 class="modal-title" style="font-size: 1.15rem;">Password Assistance</h3>
-      <button type="button" class="modal-close-btn" id="close-forgot-modal" aria-label="Close">✕</button>
+      <h3 class="modal-title" style="font-size: 1.15rem; font-weight: 700; color: #18181B;">Password Assistance</h3>
+      <button type="button" class="modal-close-btn" id="close-forgot-modal" aria-label="Close" style="background: none; border: none; font-size: 1.1rem; cursor: pointer;">✕</button>
     </div>
-    <p style="font-size: 0.95rem; color: #475569; margin-bottom: 1.25rem;">
+    <p style="font-size: 0.95rem; color: #52525B; margin-top: 0.75rem; margin-bottom: 1.25rem; line-height: 1.5;">
       For capstone testing, default account passwords are set to <code>Password123!</code>.<br><br>
       To reset your university credentials, please reach out to campus IT support.
     </p>
@@ -157,44 +231,107 @@
     document.addEventListener('DOMContentLoaded', () => {
       window.auth.redirectIfAlreadyLoggedIn();
 
-      const form = document.getElementById('login-form');
+      const authCard = document.getElementById('auth-card');
+      const panelLogin = document.getElementById('panel-login');
+      const panelRegister = document.getElementById('panel-register');
+      const btnGotoSignup = document.getElementById('btn-goto-signup');
+      const btnGotoLogin = document.getElementById('btn-goto-login');
+
+      // Login form elements
+      const loginForm = document.getElementById('login-form');
       const uniInput = document.getElementById('university-id');
       const passInput = document.getElementById('password');
-      const feedback = document.getElementById('login-feedback');
-      const btn = document.getElementById('login-btn');
+      const loginFeedback = document.getElementById('login-feedback');
+      const loginBtn = document.getElementById('login-btn');
       const togglePasswordBtn = document.getElementById('toggle-password');
       const eyeIcon = document.getElementById('eye-icon');
 
+      // Register form elements
+      const registerForm = document.getElementById('register-form');
+      const regUniInput = document.getElementById('reg-university-id');
+      const regNameInput = document.getElementById('reg-name');
+      const regDeptInput = document.getElementById('reg-dept');
+      const regYearInput = document.getElementById('reg-year');
+      const regPassInput = document.getElementById('reg-password');
+      const regConfirmInput = document.getElementById('reg-confirm-password');
+      const registerFeedback = document.getElementById('register-feedback');
+      const registerBtn = document.getElementById('register-btn');
+      const regTogglePasswordBtn = document.getElementById('reg-toggle-password');
+      const regEyeIcon = document.getElementById('reg-eye-icon');
+
+      // Demo quick buttons
       const demoStudentBtn = document.getElementById('demo-student-btn');
       const demoAdminBtn = document.getElementById('demo-admin-btn');
 
+      // Forgot password modal
       const forgotLink = document.getElementById('forgot-password-link');
       const forgotModal = document.getElementById('forgot-password-modal');
       const closeForgotModal = document.getElementById('close-forgot-modal');
       const btnModalDismiss = document.getElementById('btn-modal-dismiss');
 
-      // Check session expiry URL query
-      const urlParams = new URLSearchParams(window.location.search);
-      if (urlParams.get('expired')) {
-        feedback.textContent = 'Session expired. Please log in again.';
-        feedback.classList.add('feedback-error');
+      // --- Mode Switching Functions ---
+      function showRegisterMode(animate = true) {
+        document.title = 'Create account — PeerLink';
+        authCard.classList.add('is-expanded');
+        panelLogin.classList.remove('is-visible');
+        panelLogin.classList.add('is-hidden');
+        panelRegister.classList.remove('is-hidden');
+        panelRegister.classList.add('is-visible');
+        if (history.replaceState) {
+          history.replaceState(null, '', '#register');
+        }
+        setTimeout(() => regUniInput.focus(), animate ? 150 : 0);
       }
 
-      // Toggle show/hide password
-      if (togglePasswordBtn && passInput) {
-        togglePasswordBtn.addEventListener('click', () => {
-          const isPassword = passInput.type === 'password';
-          passInput.type = isPassword ? 'text' : 'password';
-          togglePasswordBtn.setAttribute('aria-label', isPassword ? 'Hide password' : 'Show password');
+      function showLoginMode(animate = true) {
+        document.title = 'Log in — PeerLink';
+        authCard.classList.remove('is-expanded');
+        panelRegister.classList.remove('is-visible');
+        panelRegister.classList.add('is-hidden');
+        panelLogin.classList.remove('is-hidden');
+        panelLogin.classList.add('is-visible');
+        if (history.replaceState) {
+          history.replaceState(null, '', '#login');
+        }
+        setTimeout(() => uniInput.focus(), animate ? 150 : 0);
+      }
+
+      // Button toggle triggers
+      btnGotoSignup.addEventListener('click', (e) => {
+        e.preventDefault();
+        showRegisterMode(true);
+      });
+
+      btnGotoLogin.addEventListener('click', (e) => {
+        e.preventDefault();
+        showLoginMode(true);
+      });
+
+      // Handle initial URL state (#register or ?mode=register)
+      const urlParams = new URLSearchParams(window.location.search);
+      if (window.location.hash === '#register' || urlParams.get('mode') === 'register') {
+        showRegisterMode(false);
+      }
+
+      if (urlParams.get('expired')) {
+        loginFeedback.textContent = 'Session expired. Please log in again.';
+        loginFeedback.classList.add('feedback-error');
+      }
+
+      // Password visibility toggle helpers
+      function setupEyeToggle(button, input, icon) {
+        if (!button || !input) return;
+        button.addEventListener('click', () => {
+          const isPassword = input.type === 'password';
+          input.type = isPassword ? 'text' : 'password';
+          button.setAttribute('aria-label', isPassword ? 'Hide password' : 'Show password');
           if (isPassword) {
-            // Show eye-off icon
-            eyeIcon.innerHTML = `
+            icon.innerHTML = `
               <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
               <line x1="1" y1="1" x2="23" y2="23"></line>
             `;
           } else {
-            // Show standard open eye icon
-            eyeIcon.innerHTML = `
+            icon.innerHTML = `
               <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
               <circle cx="12" cy="12" r="3"></circle>
             `;
@@ -202,13 +339,16 @@
         });
       }
 
-      // Demo quick buttons
+      setupEyeToggle(togglePasswordBtn, passInput, eyeIcon);
+      setupEyeToggle(regTogglePasswordBtn, regPassInput, regEyeIcon);
+
+      // Demo quick autofill buttons
       if (demoStudentBtn) {
         demoStudentBtn.addEventListener('click', () => {
           uniInput.value = 'STU1001';
           passInput.value = 'Password123!';
-          feedback.textContent = 'Demo student credentials loaded.';
-          feedback.className = 'form-feedback feedback-success';
+          loginFeedback.textContent = 'Demo student credentials loaded.';
+          loginFeedback.className = 'form-feedback feedback-success';
         });
       }
 
@@ -216,8 +356,8 @@
         demoAdminBtn.addEventListener('click', () => {
           uniInput.value = 'ADMIN001';
           passInput.value = 'Password123!';
-          feedback.textContent = 'Demo administrator credentials loaded.';
-          feedback.className = 'form-feedback feedback-success';
+          loginFeedback.textContent = 'Demo administrator credentials loaded.';
+          loginFeedback.className = 'form-feedback feedback-success';
         });
       }
 
@@ -235,34 +375,82 @@
         btnModalDismiss.addEventListener('click', () => forgotModal.close());
       }
 
-      // Login form submission
-      form.addEventListener('submit', async (e) => {
+      // --- 1. Login Form Submit ---
+      loginForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        feedback.textContent = '';
-        feedback.className = 'form-feedback';
+        loginFeedback.textContent = '';
+        loginFeedback.className = 'form-feedback';
 
         const university_id = uniInput.value.trim();
         const password = passInput.value;
 
-        btn.disabled = true;
-        btn.textContent = 'Authenticating...';
+        loginBtn.disabled = true;
+        loginBtn.textContent = 'Authenticating...';
 
         try {
           const res = await window.api.post('/auth/login', { university_id, password });
           window.api.setSession(res.data.token, res.data.user);
 
-          feedback.textContent = 'Login successful. Redirecting...';
-          feedback.classList.add('feedback-success');
+          loginFeedback.textContent = 'Login successful. Redirecting...';
+          loginFeedback.classList.add('feedback-success');
 
           const redirectUrl = urlParams.get('redirect') ? decodeURIComponent(urlParams.get('redirect')) : '/dashboard.html';
           setTimeout(() => {
             window.location.href = redirectUrl;
           }, 350);
         } catch (err) {
-          feedback.textContent = err.message || 'Login failed. Please check credentials.';
-          feedback.classList.add('feedback-error');
-          btn.disabled = false;
-          btn.textContent = 'Log In';
+          loginFeedback.textContent = err.message || 'Login failed. Please check credentials.';
+          loginFeedback.classList.add('feedback-error');
+          loginBtn.disabled = false;
+          loginBtn.textContent = 'Log In';
+        }
+      });
+
+      // --- 2. Register Form Submit ---
+      registerForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        registerFeedback.textContent = '';
+        registerFeedback.className = 'form-feedback';
+
+        const university_id = regUniInput.value.trim();
+        const name = regNameInput.value.trim();
+        const department = regDeptInput.value.trim();
+        const year = regYearInput.value;
+        const password = regPassInput.value;
+        const confirm = regConfirmInput.value;
+
+        if (password !== confirm) {
+          registerFeedback.textContent = 'Passwords do not match.';
+          registerFeedback.classList.add('feedback-error');
+          return;
+        }
+
+        registerBtn.disabled = true;
+        registerBtn.textContent = 'Creating account...';
+
+        try {
+          const res = await window.api.post('/auth/register', {
+            university_id,
+            password,
+            name,
+            department,
+            year
+          });
+
+          window.api.setSession(res.data.token, res.data.user);
+
+          registerFeedback.textContent = 'Account created! Redirecting to dashboard...';
+          registerFeedback.classList.add('feedback-success');
+
+          setTimeout(() => {
+            window.location.href = '/dashboard.html';
+          }, 400);
+
+        } catch (err) {
+          registerFeedback.textContent = err.message || 'Registration failed.';
+          registerFeedback.classList.add('feedback-error');
+          registerBtn.disabled = false;
+          registerBtn.textContent = 'Create Student Account →';
         }
       });
     });

@@ -3,7 +3,7 @@
    Soft Lilac / Lavender Palette, Floating White Card, Asymmetric Split
    ============================================================ */
 
-/* Page-level container for login experience */
+/* Page-level container for login and register experience */
 .auth-page-body {
   background-color: #B5A5EC;
   min-height: 100vh;
@@ -52,6 +52,7 @@
   padding: 3.5rem 4rem;
   align-items: center;
   gap: 4rem;
+  transition: gap 0.3s ease;
 }
 
 /* Left Hero Column */
@@ -80,7 +81,7 @@
 }
 
 .brand-dot {
-  color: #18181B;
+  color: #F6D049;
 }
 
 /* Large Desk Illustration Container */
@@ -134,22 +135,64 @@
   font-weight: 400;
 }
 
-/* Right Column: Floating White Login Card */
+/* Right Column: Floating White Card Container */
 .auth-card-column {
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
 }
 
-.login-card {
+/* The White Box: Expands smoothly when user presses Sign Up */
+.login-card,
+.auth-card {
   background-color: #FFFFFF;
   border-radius: 20px;
-  box-shadow: 0 25px 50px -12px rgba(30, 27, 75, 0.18), 0 0 0 1px rgba(0, 0, 0, 0.04);
-  padding: 48px 40px;
+  box-shadow: 0 24px 48px -12px rgba(24, 24, 27, 0.14), 0 0 0 1px rgba(0, 0, 0, 0.04);
+  padding: 44px 38px;
   width: 100%;
   max-width: 440px;
   display: flex;
   flex-direction: column;
+  transition: max-width 0.38s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+  will-change: max-width;
+}
+
+/* Expanded state for registration form */
+.login-card.is-expanded,
+.auth-card.is-expanded {
+  max-width: 520px;
+}
+
+/* Panel transitions between Log In and Sign Up */
+.auth-panel {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.auth-panel.is-hidden {
+  display: none !important;
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+.auth-panel.is-visible {
+  display: flex;
+  opacity: 1;
+  transform: translateY(0);
+  animation: authPanelFadeIn 0.24s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes authPanelFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .card-title {
@@ -161,6 +204,15 @@
   letter-spacing: -0.025em;
 }
 
+.card-subtitle {
+  font-size: 0.925rem;
+  color: #52525B;
+  text-align: center;
+  margin-top: -1.25rem;
+  margin-bottom: 1.75rem;
+  line-height: 1.5;
+}
+
 /* Card Input Groups */
 .input-card-group {
   border: 1px solid #E4E4E7;
@@ -169,6 +221,17 @@
   margin-bottom: 1.15rem;
   background-color: #FFFFFF;
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.input-card-row {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: 10px;
+  margin-bottom: 1.15rem;
+}
+
+.input-card-row .input-card-group {
+  margin-bottom: 0;
 }
 
 .input-card-group:focus-within {
@@ -193,6 +256,12 @@
   color: #18181B;
   background: transparent;
   padding: 0;
+}
+
+.input-inner-field.select-field {
+  cursor: pointer;
+  appearance: auto;
+  -webkit-appearance: auto;
 }
 
 .input-inner-field::placeholder {
@@ -279,6 +348,7 @@
 }
 
 /* Card Bottom Link */
+.card-bottom-toggle,
 .card-bottom-signup {
   text-align: center;
   margin-top: 1.75rem;
@@ -286,16 +356,46 @@
   color: #18181B;
 }
 
-.link-signup {
-  color: #2563EB;
+.link-signup,
+.link-toggle {
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: inherit;
+  font-size: 0.9rem;
   font-weight: 600;
+  color: #2563EB;
+  cursor: pointer;
   text-decoration: none;
   margin-left: 4px;
+  display: inline;
 }
 
-.link-signup:hover {
+.link-signup:hover,
+.link-toggle:hover {
   text-decoration: underline;
   color: #1D4ED8;
+}
+
+/* Verification Note Box for Register mode */
+.verification-note-box {
+  margin-top: 1.35rem;
+  padding: 10px 14px;
+  background-color: #F4F4F5;
+  border: 1px solid #E4E4E7;
+  border-radius: 8px;
+  font-size: 0.775rem;
+  color: #52525B;
+  line-height: 1.5;
+}
+
+.verification-note-box code {
+  font-family: var(--font-mono);
+  background-color: #E4E4E7;
+  padding: 1px 4px;
+  border-radius: 4px;
+  color: #18181B;
+  font-weight: 600;
 }
 
 /* Demo Credentials Quick Bar */
@@ -388,9 +488,19 @@
     padding: 2rem 1rem;
   }
 
-  .login-card {
+  .login-card,
+  .auth-card {
     padding: 32px 20px;
     border-radius: 16px;
+  }
+
+  .login-card.is-expanded,
+  .auth-card.is-expanded {
+    max-width: 100%;
+  }
+
+  .input-card-row {
+    grid-template-columns: 1fr;
   }
 
   .hero-headline {

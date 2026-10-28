@@ -3,115 +3,304 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Student Registration — PeerLink</title>
+  <title>Create account — PeerLink</title>
   <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="/css/components.css">
   <link rel="stylesheet" href="/css/auth.css">
 </head>
-<body>
-  <header class="site-header">
-    <nav id="main-nav" aria-label="Main Navigation"></nav>
-  </header>
+<body class="auth-page-body">
+  <div class="auth-canvas">
+    <!-- Asymmetric background polygon facet -->
+    <div class="canvas-facet" aria-hidden="true"></div>
 
-  <main class="main-content narrow">
-    <div class="auth-container">
-      <div class="auth-header">
-        <h1 class="auth-title">Create your account</h1>
-        <p class="auth-sub">Register using your University ID to connect with campus peers.</p>
-      </div>
-
-      <form id="register-form" class="auth-form">
-        <div class="form-group">
-          <label for="reg-university-id" class="form-label">University ID</label>
-          <input type="text" id="reg-university-id" class="form-input" placeholder="e.g. STU1006" required autofocus>
-          <span class="field-hint">Must match your campus enrollment identifier.</span>
+    <div class="auth-split-wrapper">
+      <!-- Left Column: Editorial & Hero Desk Scene -->
+      <section class="auth-hero-column">
+        <div class="brand-header">
+          <a href="/index.html" class="auth-brand-logo">peerlink<span class="brand-dot">.</span></a>
         </div>
 
-        <div class="form-group">
-          <label for="reg-name" class="form-label">Full Name</label>
-          <input type="text" id="reg-name" class="form-input" placeholder="e.g. Maya Patel" required>
+        <!-- Clean Desk Illustration from Deel reference -->
+        <div class="hero-illustration-wrapper" aria-hidden="true">
+          <svg class="hero-svg" viewBox="0 0 540 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="270" cy="180" r="160" fill="#9C8DE2" />
+            <polygon points="120,186 134,186 128,272 122,272" fill="#FFF7EE" stroke="#18181B" stroke-width="2" />
+            <polygon points="406,186 420,186 424,272 418,272" fill="#FFF7EE" stroke="#18181B" stroke-width="2" />
+
+            <!-- Yellow Task Chair -->
+            <path d="M 225 196 C 225 142 272 130 300 130 C 322 130 334 154 334 192 C 334 220 308 234 268 234 C 232 234 225 218 225 196 Z" fill="#F6D049" stroke="#18181B" stroke-width="2.8" stroke-linejoin="round" />
+            <path d="M 268 134 Q 312 165 312 195 Q 310 224 265 233" stroke="#18181B" stroke-width="2.2" fill="none" opacity="0.3" />
+
+            <!-- Chair Base & Castors -->
+            <rect x="275" y="234" width="10" height="28" fill="#2C2B54" stroke="#18181B" stroke-width="1.8" />
+            <line x1="280" y1="262" x2="225" y2="300" stroke="#2C2B54" stroke-width="6" stroke-linecap="round" />
+            <line x1="280" y1="262" x2="335" y2="300" stroke="#2C2B54" stroke-width="6" stroke-linecap="round" />
+            <line x1="280" y1="262" x2="202" y2="272" stroke="#2C2B54" stroke-width="6" stroke-linecap="round" />
+            <line x1="280" y1="262" x2="358" y2="272" stroke="#2C2B54" stroke-width="6" stroke-linecap="round" />
+            <line x1="280" y1="262" x2="280" y2="310" stroke="#2C2B54" stroke-width="6" stroke-linecap="round" />
+
+            <circle cx="223" cy="301" r="5.5" fill="#2C2B54" stroke="#18181B" stroke-width="1.2" />
+            <circle cx="337" cy="301" r="5.5" fill="#2C2B54" stroke="#18181B" stroke-width="1.2" />
+            <circle cx="200" cy="272" r="5.5" fill="#2C2B54" stroke="#18181B" stroke-width="1.2" />
+            <circle cx="360" cy="272" r="5.5" fill="#2C2B54" stroke="#18181B" stroke-width="1.2" />
+            <circle cx="280" cy="311" r="5.5" fill="#2C2B54" stroke="#18181B" stroke-width="1.2" />
+
+            <!-- Desk Front Legs & Tabletop -->
+            <polygon points="90,186 106,186 94,308 84,308" fill="#FFF7EE" stroke="#18181B" stroke-width="2.8" />
+            <polygon points="434,186 450,186 462,308 452,308" fill="#FFF7EE" stroke="#18181B" stroke-width="2.8" />
+            <rect x="70" y="148" width="400" height="38" rx="4" fill="#FFF7EE" stroke="#18181B" stroke-width="2.8" />
+            <line x1="135" y1="148" x2="135" y2="186" stroke="#18181B" stroke-width="2.2" />
+            <line x1="385" y1="148" x2="385" y2="186" stroke="#18181B" stroke-width="2.2" />
+            <line x1="135" y1="167" x2="385" y2="167" stroke="#18181B" stroke-width="1.8" />
+
+            <!-- Drawer Handles -->
+            <rect x="98" y="165" width="16" height="3.5" rx="1.5" fill="#18181B" />
+            <rect x="250" y="156" width="20" height="3.5" rx="1.5" fill="#18181B" />
+            <rect x="250" y="175" width="20" height="3.5" rx="1.5" fill="#18181B" />
+            <rect x="404" y="165" width="16" height="3.5" rx="1.5" fill="#18181B" />
+
+            <!-- Yellow Desk Lamp -->
+            <path d="M 416 118 C 416 75 476 75 476 118 Z" fill="#FDE047" stroke="#18181B" stroke-width="2.8" />
+            <ellipse cx="446" cy="118" rx="30" ry="4" fill="#F6D049" stroke="#18181B" stroke-width="2.2" />
+            <line x1="446" y1="122" x2="446" y2="155" stroke="#18181B" stroke-width="3.5" />
+            <rect x="438" y="155" width="16" height="31" rx="2" fill="#2C2B54" stroke="#18181B" stroke-width="2.2" />
+          </svg>
         </div>
 
-        <div class="form-group" style="display: grid; grid-template-columns: 2fr 1fr; gap: 1rem;">
-          <div>
-            <label for="reg-dept" class="form-label">Department / Major</label>
-            <input type="text" id="reg-dept" class="form-input" placeholder="e.g. Computer Science">
+        <div class="hero-content">
+          <h1 class="hero-headline">
+            Your campus.<br>
+            Your people.<br>
+            <span class="highlight-sticker">Your resources.</span>
+          </h1>
+          <p class="hero-subtext">
+            PeerLink connects university students with other students who can provide skills, tutoring, project help, and services within the campus community.
+          </p>
+        </div>
+      </section>
+
+      <!-- Right Column: Floating White Auth Box (Initialized in Expanded Register Mode) -->
+      <section class="auth-card-column">
+        <div class="auth-card is-expanded" id="auth-card">
+
+          <!-- 1. Sign Up Panel -->
+          <div class="auth-panel is-visible" id="panel-register">
+            <h2 class="card-title">Create account</h2>
+            <p class="card-subtitle">Register using your University ID to connect with campus peers.</p>
+
+            <form id="register-form">
+              <!-- University ID Field -->
+              <div class="input-card-group">
+                <label for="reg-university-id" class="input-inner-label">University ID</label>
+                <input type="text" id="reg-university-id" class="input-inner-field" placeholder="e.g. STU1006" required autocomplete="username" autofocus>
+              </div>
+
+              <!-- Full Name Field -->
+              <div class="input-card-group">
+                <label for="reg-name" class="input-inner-label">Full Name</label>
+                <input type="text" id="reg-name" class="input-inner-field" placeholder="e.g. Maya Patel" required autocomplete="name">
+              </div>
+
+              <!-- Department & Year (2-column Row) -->
+              <div class="input-card-row">
+                <div class="input-card-group">
+                  <label for="reg-dept" class="input-inner-label">Department / Major</label>
+                  <input type="text" id="reg-dept" class="input-inner-field" placeholder="e.g. Computer Science">
+                </div>
+                <div class="input-card-group">
+                  <label for="reg-year" class="input-inner-label">Year of Study</label>
+                  <select id="reg-year" class="input-inner-field select-field">
+                    <option value="1">1st Year</option>
+                    <option value="2">2nd Year</option>
+                    <option value="3">3rd Year</option>
+                    <option value="4">4th Year</option>
+                    <option value="5">Graduate</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Password Field with Show/Hide toggle -->
+              <div class="input-card-group input-with-action">
+                <div class="input-text-wrapper">
+                  <label for="reg-password" class="input-inner-label">Password</label>
+                  <input type="password" id="reg-password" class="input-inner-field" placeholder="At least 6 characters" required autocomplete="new-password">
+                </div>
+                <button type="button" class="btn-toggle-password" id="reg-toggle-password" aria-label="Toggle password visibility">
+                  <svg id="reg-eye-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                  </svg>
+                </button>
+              </div>
+
+              <!-- Confirm Password Field -->
+              <div class="input-card-group">
+                <label for="reg-confirm-password" class="input-inner-label">Confirm Password</label>
+                <input type="password" id="reg-confirm-password" class="input-inner-field" placeholder="Repeat your password" required autocomplete="new-password">
+              </div>
+
+              <div id="register-feedback" class="form-feedback" role="alert" aria-live="polite"></div>
+
+              <button type="submit" id="register-btn" class="btn-card-submit">Create Student Account →</button>
+            </form>
+
+            <div class="card-bottom-toggle">
+              Already have an account? <button type="button" class="link-toggle" id="btn-goto-login">Log In</button>
+            </div>
+
+            <div class="verification-note-box">
+              <strong>Verification Note:</strong> Newly registered student accounts begin in <code>PENDING</code> status until verified by campus administration.
+            </div>
           </div>
-          <div>
-            <label for="reg-year" class="form-label">Year of Study</label>
-            <select id="reg-year" class="form-select">
-              <option value="1">1st Year</option>
-              <option value="2">2nd Year</option>
-              <option value="3">3rd Year</option>
-              <option value="4">4th Year</option>
-              <option value="5">Graduate</option>
-            </select>
+
+          <!-- 2. Log In Panel -->
+          <div class="auth-panel is-hidden" id="panel-login">
+            <h2 class="card-title">Log in</h2>
+
+            <form id="login-form">
+              <div class="input-card-group">
+                <label for="university-id" class="input-inner-label">University ID / Campus Email</label>
+                <input type="text" id="university-id" class="input-inner-field" placeholder="e.g. STU1001" autocomplete="username">
+              </div>
+
+              <div class="input-card-group input-with-action">
+                <div class="input-text-wrapper">
+                  <label for="password" class="input-inner-label">Password</label>
+                  <input type="password" id="password" class="input-inner-field" placeholder="••••••••••••" autocomplete="current-password">
+                </div>
+                <button type="button" class="btn-toggle-password" id="toggle-password" aria-label="Toggle password visibility">
+                  <svg id="eye-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                  </svg>
+                </button>
+              </div>
+
+              <div id="login-feedback" class="form-feedback" role="alert" aria-live="polite"></div>
+
+              <button type="submit" id="login-btn" class="btn-card-submit">Log In</button>
+            </form>
+
+            <div class="card-bottom-toggle">
+              Need to create an account? <button type="button" class="link-toggle" id="btn-goto-signup">Sign Up</button>
+            </div>
           </div>
+
         </div>
-
-        <div class="form-group">
-          <label for="reg-password" class="form-label">Password</label>
-          <input type="password" id="reg-password" class="form-input" placeholder="At least 6 characters" required autocomplete="new-password">
-        </div>
-
-        <div class="form-group">
-          <label for="reg-confirm-password" class="form-label">Confirm Password</label>
-          <input type="password" id="reg-confirm-password" class="form-input" placeholder="Repeat your password" required autocomplete="new-password">
-        </div>
-
-        <div id="register-feedback" class="form-feedback" role="alert" aria-live="polite"></div>
-
-        <button type="submit" id="register-btn" class="btn btn-primary btn-block">Create student account →</button>
-      </form>
-
-      <div class="auth-footer">
-        <p>Already have an account? <a href="/login.html">Sign in here</a></p>
-      </div>
-
-      <div class="demo-credentials-note">
-        <strong>Verification Note:</strong><br>
-        Newly registered accounts begin in <code>PENDING</code> status until verified by campus administration.
-      </div>
+      </section>
     </div>
-  </main>
-
-  <footer class="site-footer">
-    <div class="footer-inner">
-      <p>© 2026 PeerLink · University Capstone</p>
-    </div>
-  </footer>
+  </div>
 
   <script src="/js/api.js"></script>
   <script src="/js/auth.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       window.auth.redirectIfAlreadyLoggedIn();
-      window.auth.updateNavigation('register');
 
-      const form = document.getElementById('register-form');
-      const feedback = document.getElementById('register-feedback');
-      const btn = document.getElementById('register-btn');
+      const authCard = document.getElementById('auth-card');
+      const panelLogin = document.getElementById('panel-login');
+      const panelRegister = document.getElementById('panel-register');
+      const btnGotoSignup = document.getElementById('btn-goto-signup');
+      const btnGotoLogin = document.getElementById('btn-goto-login');
 
-      form.addEventListener('submit', async (e) => {
+      // Login form elements
+      const loginForm = document.getElementById('login-form');
+      const uniInput = document.getElementById('university-id');
+      const passInput = document.getElementById('password');
+      const loginFeedback = document.getElementById('login-feedback');
+      const loginBtn = document.getElementById('login-btn');
+      const togglePasswordBtn = document.getElementById('toggle-password');
+      const eyeIcon = document.getElementById('eye-icon');
+
+      // Register form elements
+      const registerForm = document.getElementById('register-form');
+      const regUniInput = document.getElementById('reg-university-id');
+      const regNameInput = document.getElementById('reg-name');
+      const regDeptInput = document.getElementById('reg-dept');
+      const regYearInput = document.getElementById('reg-year');
+      const regPassInput = document.getElementById('reg-password');
+      const regConfirmInput = document.getElementById('reg-confirm-password');
+      const registerFeedback = document.getElementById('register-feedback');
+      const registerBtn = document.getElementById('register-btn');
+      const regTogglePasswordBtn = document.getElementById('reg-toggle-password');
+      const regEyeIcon = document.getElementById('reg-eye-icon');
+
+      // --- Mode Switching Functions ---
+      function showRegisterMode(animate = true) {
+        document.title = 'Create account — PeerLink';
+        authCard.classList.add('is-expanded');
+        panelLogin.classList.remove('is-visible');
+        panelLogin.classList.add('is-hidden');
+        panelRegister.classList.remove('is-hidden');
+        panelRegister.classList.add('is-visible');
+        setTimeout(() => regUniInput.focus(), animate ? 150 : 0);
+      }
+
+      function showLoginMode(animate = true) {
+        document.title = 'Log in — PeerLink';
+        authCard.classList.remove('is-expanded');
+        panelRegister.classList.remove('is-visible');
+        panelRegister.classList.add('is-hidden');
+        panelLogin.classList.remove('is-hidden');
+        panelLogin.classList.add('is-visible');
+        setTimeout(() => uniInput.focus(), animate ? 150 : 0);
+      }
+
+      btnGotoSignup.addEventListener('click', (e) => {
         e.preventDefault();
-        feedback.textContent = '';
-        feedback.className = 'form-feedback';
+        showRegisterMode(true);
+      });
 
-        const university_id = document.getElementById('reg-university-id').value.trim();
-        const name = document.getElementById('reg-name').value.trim();
-        const department = document.getElementById('reg-dept').value.trim();
-        const year = document.getElementById('reg-year').value;
-        const password = document.getElementById('reg-password').value;
-        const confirm = document.getElementById('reg-confirm-password').value;
+      btnGotoLogin.addEventListener('click', (e) => {
+        e.preventDefault();
+        showLoginMode(true);
+      });
+
+      // Password visibility toggle helpers
+      function setupEyeToggle(button, input, icon) {
+        if (!button || !input) return;
+        button.addEventListener('click', () => {
+          const isPassword = input.type === 'password';
+          input.type = isPassword ? 'text' : 'password';
+          button.setAttribute('aria-label', isPassword ? 'Hide password' : 'Show password');
+          if (isPassword) {
+            icon.innerHTML = `
+              <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+              <line x1="1" y1="1" x2="23" y2="23"></line>
+            `;
+          } else {
+            icon.innerHTML = `
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+              <circle cx="12" cy="12" r="3"></circle>
+            `;
+          }
+        });
+      }
+
+      setupEyeToggle(togglePasswordBtn, passInput, eyeIcon);
+      setupEyeToggle(regTogglePasswordBtn, regPassInput, regEyeIcon);
+
+      // Register form submission
+      registerForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        registerFeedback.textContent = '';
+        registerFeedback.className = 'form-feedback';
+
+        const university_id = regUniInput.value.trim();
+        const name = regNameInput.value.trim();
+        const department = regDeptInput.value.trim();
+        const year = regYearInput.value;
+        const password = regPassInput.value;
+        const confirm = regConfirmInput.value;
 
         if (password !== confirm) {
-          feedback.textContent = 'Passwords do not match.';
-          feedback.classList.add('feedback-error');
+          registerFeedback.textContent = 'Passwords do not match.';
+          registerFeedback.classList.add('feedback-error');
           return;
         }
 
-        btn.disabled = true;
-        btn.textContent = 'Registering...';
+        registerBtn.disabled = true;
+        registerBtn.textContent = 'Creating account...';
 
         try {
           const res = await window.api.post('/auth/register', {
@@ -124,18 +313,48 @@
 
           window.api.setSession(res.data.token, res.data.user);
 
-          feedback.textContent = 'Account created! Redirecting to dashboard...';
-          feedback.classList.add('feedback-success');
+          registerFeedback.textContent = 'Account created! Redirecting to dashboard...';
+          registerFeedback.classList.add('feedback-success');
 
           setTimeout(() => {
             window.location.href = '/dashboard.html';
-          }, 500);
+          }, 400);
 
         } catch (err) {
-          feedback.textContent = err.message || 'Registration failed.';
-          feedback.classList.add('feedback-error');
-          btn.disabled = false;
-          btn.textContent = 'Create student account →';
+          registerFeedback.textContent = err.message || 'Registration failed.';
+          registerFeedback.classList.add('feedback-error');
+          registerBtn.disabled = false;
+          registerBtn.textContent = 'Create Student Account →';
+        }
+      });
+
+      // Login form submission
+      loginForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        loginFeedback.textContent = '';
+        loginFeedback.className = 'form-feedback';
+
+        const university_id = uniInput.value.trim();
+        const password = passInput.value;
+
+        loginBtn.disabled = true;
+        loginBtn.textContent = 'Authenticating...';
+
+        try {
+          const res = await window.api.post('/auth/login', { university_id, password });
+          window.api.setSession(res.data.token, res.data.user);
+
+          loginFeedback.textContent = 'Login successful. Redirecting...';
+          loginFeedback.classList.add('feedback-success');
+
+          setTimeout(() => {
+            window.location.href = '/dashboard.html';
+          }, 350);
+        } catch (err) {
+          loginFeedback.textContent = err.message || 'Login failed. Please check credentials.';
+          loginFeedback.classList.add('feedback-error');
+          loginBtn.disabled = false;
+          loginBtn.textContent = 'Log In';
         }
       });
     });

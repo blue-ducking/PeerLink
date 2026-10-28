@@ -4,15 +4,22 @@ description: Closed-campus peer-to-peer student platform with Mona Sans typograp
 colors:
   neutral-bg: "#f8fafc"
   neutral-surface: "#ffffff"
-  text-primary: "#0f172a"
-  text-secondary: "#475569"
-  text-muted: "#94a3b8"
-  border-subtle: "#e2e8f0"
-  border-strong: "#cbd5e1"
-  primary: "#1e293b"
-  primary-hover: "#0f172a"
+  neutral-subtle: "#f4f4f5"
+  text-primary: "#18181b"
+  text-secondary: "#52525b"
+  text-muted: "#71717a"
+  border-subtle: "#e4e4e7"
+  border-strong: "#d4d4d8"
+  primary: "#18181b"
+  primary-hover: "#27272a"
   accent: "#2563eb"
   accent-hover: "#1d4ed8"
+  brand-lilac: "#b5a5ec"
+  brand-lilac-facet: "#9d8de2"
+  brand-lilac-subtle: "#f0edfb"
+  brand-lilac-scrollbar: "#c8beef"
+  brand-yellow: "#f6d049"
+  brand-yellow-hover: "#fde047"
   status-verified: "#166534"
   status-verified-bg: "#f0fdf4"
   status-pending: "#854d0e"
@@ -65,6 +72,7 @@ rounded:
   md: "6px"
   lg: "8px"
   xl: "12px"
+  card-sm: "16px"
   xxl: "20px"
 spacing:
   xs: "4px"
@@ -82,7 +90,7 @@ components:
   button-primary-hover:
     backgroundColor: "{colors.primary-hover}"
   button-secondary:
-    backgroundColor: "transparent"
+    backgroundColor: "{colors.neutral-surface}"
     textColor: "{colors.text-primary}"
     rounded: "{rounded.md}"
     padding: "10px 18px"
@@ -93,13 +101,13 @@ PeerLink's design language draws inspiration from Mona Sans, GitHub's editorial 
 
 ## Colors
 - **Canvas (`neutral-bg`)**: `#f8fafc` — crisp, clean light canvas for internal dashboard views.
-- **Auth Canvas (`auth-canvas`)**: `#b5a5ec` — soft lilac purple canvas directly inspired by `LogIn.png`.
-- **Auth Facet (`auth-facet`)**: `#9d8de2` — angled geometric facet shade for visual momentum.
+- **Auth Canvas (`auth-canvas` / `brand-lilac`)**: `#b5a5ec` — soft lilac purple canvas directly inspired by `LogIn.png`.
+- **Auth Facet (`auth-facet` / `brand-lilac-facet`)**: `#9d8de2` — angled geometric facet shade for visual momentum.
 - **Surface (`neutral-surface` / `auth-card-bg`)**: `#ffffff` — clean floating card background.
 - **Primary Text (`text-primary` / `auth-text-dark`)**: `#18181b` — deep charcoal slate for high contrast.
-- **Secondary Text (`text-secondary`)**: `#475569` and `#71717a` — balanced readable contrast (≥ 4.5:1).
-- **Accent Yellow (`auth-yellow`)**: `#f6d049` / `#fde047` — vibrant task chair and lamp accent.
-- **Borders (`border-subtle`, `border-strong`)**: `#e2e8f0` and `#e4e4e7` — minimal hairline dividers.
+- **Secondary Text (`text-secondary`)**: `#52525b` and `#71717a` — balanced readable contrast (≥ 4.5:1).
+- **Accent Yellow (`auth-yellow` / `brand-yellow`)**: `#f6d049` / `#fde047` — vibrant task chair, lamp, and sticker accent.
+- **Borders (`border-subtle`, `border-strong`)**: `#e4e4e7` and `#d4d4d8` — minimal hairline dividers.
 - **Primary Action (`primary`)**: `#18181b` with hover `#27272a`.
 - **Accent Link (`accent`)**: `#2563eb` — focused interactive cues.
 
@@ -115,14 +123,14 @@ PeerLink's design language draws inspiration from Mona Sans, GitHub's editorial 
 
 ## Elevation & Depth
 - Flat by default. Elevation is communicated through tonal contrast and hairline borders (`1px solid var(--border-subtle)`), not heavy drop shadows.
-- Modest shadow `0 1px 3px rgba(15, 23, 42, 0.06)` used only on active floating controls like dropdown menus or search focus.
+- Floating cards use soft depth: `0 25px 50px -12px rgba(30, 27, 75, 0.18), 0 0 0 1px rgba(0, 0, 0, 0.04)`.
 
 ## Shapes
-- Modest corner radii: `6px` for buttons, inputs, and small badges. No oversized pill buttons.
+- Modest corner radii: `6px` to `8px` for buttons, inputs, and small badges. `20px` for floating cards.
 - Clean straight edges with hairline dividers.
 
 ## Components
-- **Buttons**: Restrained, accessible buttons with high-contrast text and 6px border-radius.
+- **Buttons**: Restrained, accessible buttons with high-contrast text and 8px border-radius.
 - **Forms**: Clean inputs with explicit semantic labels, clear placeholder guidance, inline validation, and visible focus rings.
 - **Dividers**: 1px subtle lines (`border-bottom: 1px solid var(--border-subtle)`) separating list items and sections.
 - **Status Badges**: Text with subtle color indicators (e.g. `● Verified`), not giant loud banners.
