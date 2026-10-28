@@ -1,6 +1,6 @@
 /* ============================================================
    PEERLINK DESIGN SYSTEM
-   Mona Sans & GitHub Editorial Design Language
+   Mona Sans & Deel/Violet Editorial Design Language
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wght@0,300..800;1,300..800&display=swap');
@@ -53,6 +53,8 @@
   --radius-sm: 4px;
   --radius-md: 6px;
   --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-card-sm: 16px;
   --radius-card: 20px;
 
   --shadow-card: 0 20px 40px -15px rgba(30, 27, 75, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.04);
@@ -157,93 +159,363 @@ a:hover {
   color: var(--accent);
 }
 
-/* Global Nav */
+/* ============================================================
+   GLOBAL NAVIGATION BAR (Skillshare-Style Dark Top Bar with Violet Brand)
+   ============================================================ */
 .site-header {
-  border-bottom: 1px solid var(--border-subtle);
-  background: var(--neutral-surface);
+  background-color: #121217;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   position: sticky;
   top: 0;
   z-index: 100;
+  padding: 0;
 }
 
-.nav-inner {
-  max-width: var(--max-width-page);
+.dash-nav-inner {
+  max-width: 1440px;
   margin: 0 auto;
-  padding: var(--space-sm) var(--space-lg);
+  padding: 0.75rem 2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--space-md);
+  gap: 1.5rem;
 }
 
-.nav-brand {
+/* Left Group: Brand Logo (redirects to /dashboard.html) */
+.dash-nav-left {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-shrink: 0;
+}
+
+.dash-brand-logo {
   font-family: var(--font-family);
   font-weight: 800;
-  font-size: 1.25rem;
+  font-size: 1.35rem;
   letter-spacing: -0.035em;
-  color: var(--text-primary);
+  color: #FFFFFF;
+  text-decoration: none;
   display: inline-flex;
   align-items: baseline;
-  gap: 1px;
+  transition: opacity 0.15s ease;
 }
 
-.nav-brand .brand-dot {
+.dash-brand-logo:hover {
+  opacity: 0.9;
+  color: #FFFFFF;
+}
+
+.dash-brand-logo .brand-dot {
   color: var(--brand-yellow);
 }
 
-.nav-links {
-  display: flex;
-  list-style: none;
-  gap: var(--space-xs);
-  align-items: center;
-}
-
-.nav-link {
-  font-size: 0.9rem;
-  color: var(--text-secondary);
+.dash-nav-link {
+  color: #D4D4D8;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
   padding: 6px 12px;
   border-radius: var(--radius-md);
   transition: all 0.15s ease;
-  font-weight: 500;
 }
 
-.nav-link:hover {
-  color: var(--text-primary);
-  background-color: var(--neutral-subtle);
+.dash-nav-link:hover {
+  color: #FFFFFF;
+  background-color: rgba(255, 255, 255, 0.08);
 }
 
-.nav-link.active {
-  color: var(--text-primary);
+.dash-nav-link.active {
+  color: #FFFFFF;
+  background-color: rgba(255, 255, 255, 0.12);
   font-weight: 600;
-  background-color: var(--brand-lilac-subtle);
 }
 
-.nav-user-meta {
+/* Center Group: Wide Search Bar */
+.dash-nav-center {
+  flex: 1;
+  max-width: 580px;
+  margin: 0 1rem;
+}
+
+.dash-search-container {
+  position: relative;
   display: flex;
   align-items: center;
-  gap: var(--space-sm);
-  font-size: 0.85rem;
+  width: 100%;
 }
 
-.nav-user-id {
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  color: var(--text-secondary);
+.dash-search-icon {
+  position: absolute;
+  left: 14px;
+  width: 18px;
+  height: 18px;
+  color: #A1A1AA;
+  pointer-events: none;
 }
 
-.nav-logout-action {
+.dash-header-search {
+  width: 100%;
+  padding: 10px 16px 10px 42px;
+  background-color: #22222A;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: var(--radius-lg);
+  color: #FFFFFF;
+  font-family: inherit;
+  font-size: 0.925rem;
+  transition: all 0.15s ease;
+}
+
+.dash-header-search::placeholder {
+  color: #8E8E93;
+}
+
+.dash-header-search:focus {
+  outline: none;
+  background-color: #282832;
+  border-color: var(--brand-lilac);
+  box-shadow: 0 0 0 1px var(--brand-lilac);
+}
+
+/* Right Group: Requests, Notifications, Avatar & CTA */
+.dash-nav-right {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.dash-bell-btn {
   background: none;
   border: none;
-  color: var(--text-muted);
-  font-size: 0.85rem;
+  color: #D4D4D8;
   cursor: pointer;
-  padding: 4px 8px;
-  border-radius: var(--radius-sm);
-  font-family: inherit;
+  position: relative;
+  padding: 8px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
 }
 
-.nav-logout-action:hover {
+.dash-bell-btn:hover {
+  color: #FFFFFF;
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.bell-badge-dot {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 8px;
+  height: 8px;
+  background-color: var(--brand-yellow);
+  border-radius: 50%;
+  border: 2px solid #121217;
+}
+
+/* Circular User Avatar */
+.dash-avatar-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--brand-lilac) 0%, var(--brand-lilac-facet) 100%);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  color: #18181B;
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  user-select: none;
+}
+
+.dash-avatar-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 0 2px var(--brand-lilac);
+}
+
+/* Violet CTA Button (Signature Deel / Violet Theme) */
+.dash-cta-btn {
+  background-color: var(--brand-lilac-facet);
+  color: #18181B;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+  padding: 8px 16px;
+  border-radius: var(--radius-lg);
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.dash-cta-btn:hover {
+  background-color: var(--brand-lilac);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  color: #18181B;
+}
+
+/* Floating User Profile Popover Menu */
+.profile-popover-menu {
+  position: absolute;
+  top: 56px;
+  right: 0;
+  width: 270px;
+  background-color: #FFFFFF;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.22), 0 0 0 1px rgba(0, 0, 0, 0.05);
+  padding: 20px 18px;
+  display: none;
+  flex-direction: column;
+  z-index: 1000;
+  animation: popoverFadeIn 0.18s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.profile-popover-menu.is-open {
+  display: flex;
+}
+
+@keyframes popoverFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.popover-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 14px;
+}
+
+.popover-avatar-lg {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--brand-lilac) 0%, var(--brand-lilac-facet) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+.popover-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+
+.popover-headline {
+  font-size: 0.825rem;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+  line-height: 1.35;
+}
+
+.popover-btn-profile {
+  display: block;
+  width: 100%;
+  background-color: var(--brand-lilac-facet);
+  color: #18181B;
+  font-weight: 700;
+  font-size: 0.875rem;
+  text-align: center;
+  padding: 8px 14px;
+  border-radius: var(--radius-card);
+  text-decoration: none;
+  transition: all 0.15s ease;
+}
+
+.popover-btn-profile:hover {
+  background-color: var(--brand-lilac);
+  color: #18181B;
+}
+
+.popover-divider {
+  height: 1px;
+  background-color: var(--border-subtle);
+  margin: 12px 0;
+}
+
+.popover-nav-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.popover-nav-item a,
+.popover-logout-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 10px;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  text-decoration: none;
+  border-radius: var(--radius-md);
+  transition: background-color 0.12s ease;
+  font-weight: 500;
+  width: 100%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.popover-nav-item a:hover,
+.popover-logout-btn:hover {
+  background-color: var(--brand-lilac-subtle);
+  color: var(--text-primary);
+}
+
+.popover-status-badge {
+  font-size: 0.725rem;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: var(--radius-xl);
+  background-color: var(--status-verified-bg);
+  color: var(--status-verified);
+}
+
+.popover-logout-btn {
   color: var(--status-rejected);
+}
+
+.popover-logout-btn:hover {
+  background-color: var(--status-rejected-bg);
+  color: var(--status-rejected);
+}
+
+@media (max-width: 860px) {
+  .dash-nav-center {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .dash-nav-inner {
+    padding: 0.75rem 1rem;
+  }
 }
 
 /* Layout Containers */
@@ -315,21 +587,6 @@ a:hover {
 
 /* Responsive Breakpoints */
 @media (max-width: 768px) {
-  .nav-inner {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .nav-links {
-    flex-wrap: wrap;
-    gap: var(--space-xs);
-    width: 100%;
-  }
-  .nav-user-meta {
-    width: 100%;
-    justify-content: space-between;
-    padding-top: var(--space-xs);
-    border-top: 1px solid var(--border-subtle);
-  }
   .main-content {
     padding: var(--space-lg) var(--space-md);
   }

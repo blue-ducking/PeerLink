@@ -1,368 +1,10 @@
 /* ============================================================
-   PEERLINK DASHBOARD STYLING (Skillshare Reference + Violet Brand Palette)
-   Dark Top Bar, Left Category Sidebar, 3-Column Visual Card Grid,
-   Interactive Profile Popover Dropdown
+   PEERLINK DASHBOARD STYLING
+   Two-Column Layout (Category Sidebar + 3-Column Card Grid)
    ============================================================ */
 
 /* ------------------------------------------------------------
-   1. SKILLSHARE-STYLE DARK NAVIGATION BAR
-   ------------------------------------------------------------ */
-.site-header.dash-dark-header {
-  background-color: #121217;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  padding: 0;
-}
-
-.dash-nav-inner {
-  max-width: 1440px;
-  margin: 0 auto;
-  padding: 0.75rem 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1.5rem;
-}
-
-/* Left Group: Brand Logo & Browse Dropdown */
-.dash-nav-left {
-  display: flex;
-  align-items: center;
-  gap: 1.75rem;
-  flex-shrink: 0;
-}
-
-.dash-brand-logo {
-  font-family: var(--font-family);
-  font-weight: 800;
-  font-size: 1.35rem;
-  letter-spacing: -0.035em;
-  color: #FFFFFF;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: baseline;
-}
-
-.dash-brand-logo .brand-dot {
-  color: #F6D049;
-}
-
-.dash-browse-btn {
-  background: none;
-  border: none;
-  color: #D4D4D8;
-  font-family: inherit;
-  font-size: 0.95rem;
-  font-weight: 500;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 10px;
-  border-radius: 6px;
-  transition: all 0.15s ease;
-}
-
-.dash-browse-btn:hover {
-  color: #FFFFFF;
-  background-color: rgba(255, 255, 255, 0.08);
-}
-
-.dash-nav-link {
-  color: #D4D4D8;
-  text-decoration: none;
-  font-size: 0.95rem;
-  font-weight: 500;
-  padding: 6px 10px;
-  border-radius: 6px;
-  transition: all 0.15s ease;
-}
-
-.dash-nav-link:hover {
-  color: #FFFFFF;
-  background-color: rgba(255, 255, 255, 0.08);
-}
-
-/* Center Group: Wide Search Bar */
-.dash-nav-center {
-  flex: 1;
-  max-width: 580px;
-  margin: 0 1rem;
-}
-
-.dash-search-container {
-  position: relative;
-  display: flex;
-  align-items: center;
-  width: 100%;
-}
-
-.dash-search-icon {
-  position: absolute;
-  left: 14px;
-  width: 18px;
-  height: 18px;
-  color: #A1A1AA;
-  pointer-events: none;
-}
-
-.dash-header-search {
-  width: 100%;
-  padding: 10px 16px 10px 42px;
-  background-color: #22222A;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 8px;
-  color: #FFFFFF;
-  font-family: inherit;
-  font-size: 0.925rem;
-  transition: all 0.15s ease;
-}
-
-.dash-header-search::placeholder {
-  color: #8E8E93;
-}
-
-.dash-header-search:focus {
-  outline: none;
-  background-color: #282832;
-  border-color: #B5A5EC;
-  box-shadow: 0 0 0 1px #B5A5EC;
-}
-
-/* Right Group: Requests, Notifications, Avatar & CTA */
-.dash-nav-right {
-  display: flex;
-  align-items: center;
-  gap: 1.25rem;
-  flex-shrink: 0;
-  position: relative;
-}
-
-.dash-bell-btn {
-  background: none;
-  border: none;
-  color: #D4D4D8;
-  cursor: pointer;
-  position: relative;
-  padding: 8px;
-  border-radius: 50%;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.15s ease;
-}
-
-.dash-bell-btn:hover {
-  color: #FFFFFF;
-  background-color: rgba(255, 255, 255, 0.08);
-}
-
-.bell-badge-dot {
-  position: absolute;
-  top: 6px;
-  right: 6px;
-  width: 8px;
-  height: 8px;
-  background-color: #F6D049;
-  border-radius: 50%;
-  border: 2px solid #121217;
-}
-
-/* Circular User Avatar */
-.dash-avatar-btn {
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #B5A5EC 0%, #9D8DE2 100%);
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  color: #18181B;
-  font-weight: 700;
-  font-size: 0.85rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-  user-select: none;
-}
-
-.dash-avatar-btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 0 2px #B5A5EC;
-}
-
-/* Violet CTA Button (Signature Deel / Violet Theme) */
-.dash-cta-btn {
-  background-color: #9D8DE2;
-  color: #18181B;
-  font-family: inherit;
-  font-size: 0.9rem;
-  font-weight: 700;
-  padding: 8px 16px;
-  border-radius: 8px;
-  text-decoration: none;
-  border: none;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  transition: all 0.15s ease;
-  white-space: nowrap;
-}
-
-.dash-cta-btn:hover {
-  background-color: #B5A5EC;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
-
-/* ------------------------------------------------------------
-   2. SKILLSHARE-STYLE USER PROFILE POPOVER MENU (From Reference)
-   ------------------------------------------------------------ */
-.profile-popover-menu {
-  position: absolute;
-  top: 56px;
-  right: 0;
-  width: 270px;
-  background-color: #FFFFFF;
-  border: 1px solid #E4E4E7;
-  border-radius: 12px;
-  box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.22), 0 0 0 1px rgba(0, 0, 0, 0.05);
-  padding: 20px 18px;
-  display: none;
-  flex-direction: column;
-  z-index: 1000;
-  animation: popoverFadeIn 0.18s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-.profile-popover-menu.is-open {
-  display: flex;
-}
-
-@keyframes popoverFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.popover-header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  margin-bottom: 14px;
-}
-
-.popover-avatar-lg {
-  width: 68px;
-  height: 68px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #B5A5EC 0%, #9D8DE2 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 10px;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
-}
-
-.popover-name {
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: #18181B;
-  margin-bottom: 2px;
-}
-
-.popover-headline {
-  font-size: 0.825rem;
-  color: #52525B;
-  margin-bottom: 12px;
-  line-height: 1.35;
-}
-
-.popover-btn-profile {
-  display: block;
-  width: 100%;
-  background-color: #9D8DE2;
-  color: #18181B;
-  font-weight: 700;
-  font-size: 0.875rem;
-  text-align: center;
-  padding: 8px 14px;
-  border-radius: 20px;
-  text-decoration: none;
-  transition: all 0.15s ease;
-}
-
-.popover-btn-profile:hover {
-  background-color: #B5A5EC;
-  color: #18181B;
-}
-
-.popover-divider {
-  height: 1px;
-  background-color: #E4E4E7;
-  margin: 12px 0;
-}
-
-.popover-nav-list {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.popover-nav-item a,
-.popover-logout-btn {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 8px 10px;
-  font-size: 0.9rem;
-  color: #18181B;
-  text-decoration: none;
-  border-radius: 6px;
-  transition: background-color 0.12s ease;
-  font-weight: 500;
-  width: 100%;
-  background: none;
-  border: none;
-  cursor: pointer;
-  text-align: left;
-}
-
-.popover-nav-item a:hover,
-.popover-logout-btn:hover {
-  background-color: #F0EDFB;
-  color: #18181B;
-}
-
-.popover-status-badge {
-  font-size: 0.725rem;
-  font-weight: 600;
-  padding: 2px 7px;
-  border-radius: 12px;
-  background-color: #ECFDF5;
-  color: #166534;
-}
-
-.popover-logout-btn {
-  color: #991B1B;
-}
-
-.popover-logout-btn:hover {
-  background-color: #FEF2F2;
-  color: #991B1B;
-}
-
-/* ------------------------------------------------------------
-   3. DASHBOARD TWO-COLUMN LAYOUT (Category Sidebar + Main Cards)
+   1. DASHBOARD TWO-COLUMN LAYOUT (Category Sidebar + Main Cards)
    ------------------------------------------------------------ */
 .dash-layout-container {
   max-width: 1440px;
@@ -404,10 +46,10 @@
   background: none;
   border: none;
   padding: 8px 12px;
-  border-radius: 6px;
+  border-radius: var(--radius-md);
   font-family: inherit;
   font-size: 0.95rem;
-  color: #52525B;
+  color: var(--text-secondary);
   cursor: pointer;
   transition: all 0.15s ease;
   display: flex;
@@ -416,21 +58,21 @@
 }
 
 .category-nav-item button:hover {
-  color: #18181B;
-  background-color: #F4F4F6;
+  color: var(--text-primary);
+  background-color: var(--neutral-subtle);
 }
 
 .category-nav-item.active button {
-  color: #18181B;
+  color: var(--text-primary);
   font-weight: 700;
-  background-color: #F0EDFB;
+  background-color: var(--brand-lilac-subtle);
 }
 
 /* Sidebar Student Activity Card */
 .sidebar-activity-box {
   background-color: #FFFFFF;
-  border: 1px solid #E4E4E7;
-  border-radius: 12px;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
   padding: 18px 16px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
 }
@@ -438,7 +80,7 @@
 .sidebar-activity-title {
   font-size: 0.85rem;
   font-weight: 700;
-  color: #18181B;
+  color: var(--text-primary);
   text-transform: uppercase;
   letter-spacing: 0.04em;
   margin-bottom: 12px;
@@ -449,9 +91,9 @@
   align-items: center;
   justify-content: space-between;
   padding: 7px 0;
-  border-bottom: 1px solid #F4F4F6;
+  border-bottom: 1px solid var(--neutral-subtle);
   font-size: 0.875rem;
-  color: #52525B;
+  color: var(--text-secondary);
 }
 
 .sidebar-stat-row:last-child {
@@ -461,12 +103,12 @@
 
 .sidebar-stat-val {
   font-weight: 700;
-  color: #18181B;
+  color: var(--text-primary);
   font-size: 0.95rem;
 }
 
 /* ------------------------------------------------------------
-   4. MAIN DASHBOARD CONTENT AREA & 3-COLUMN CARDS
+   2. MAIN DASHBOARD CONTENT AREA & 3-COLUMN CARDS
    ------------------------------------------------------------ */
 .dash-main-content {
   min-width: 0;
@@ -476,13 +118,13 @@
   font-size: 2.15rem;
   font-weight: 700;
   letter-spacing: -0.03em;
-  color: #18181B;
+  color: var(--text-primary);
   margin-bottom: 0.35rem;
 }
 
 .dash-page-desc {
   font-size: 1rem;
-  color: #52525B;
+  color: var(--text-secondary);
   margin-bottom: 2rem;
 }
 
@@ -497,25 +139,25 @@
   font-size: 1.5rem;
   font-weight: 700;
   letter-spacing: -0.025em;
-  color: #18181B;
+  color: var(--text-primary);
   margin: 0;
 }
 
-/* Skillshare-Style Outlined "View All" Button */
+/* Outlined "View All" Button */
 .btn-view-all-outline {
   display: inline-block;
-  border: 1.5px solid #18181B;
-  border-radius: 6px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: var(--radius-md);
   padding: 6px 14px;
   font-size: 0.85rem;
   font-weight: 600;
-  color: #18181B;
+  color: var(--text-primary);
   text-decoration: none;
   transition: all 0.15s ease;
 }
 
 .btn-view-all-outline:hover {
-  background-color: #18181B;
+  background-color: var(--text-primary);
   color: #FFFFFF;
 }
 
@@ -529,8 +171,8 @@
 /* Individual Card (Skillshare Visual Format + Violet Palette) */
 .peer-card {
   background-color: #FFFFFF;
-  border: 1px solid #E4E4E7;
-  border-radius: 12px;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -542,7 +184,7 @@
 .peer-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 16px 32px -10px rgba(0, 0, 0, 0.12);
-  border-color: #B5A5EC;
+  border-color: var(--brand-lilac);
 }
 
 /* Card Visual Thumbnail Banner */
@@ -563,7 +205,7 @@
   object-fit: cover;
 }
 
-/* Sticker Pill on Thumbnail (Skillshare "Staff Pick." style) */
+/* Sticker Pill on Thumbnail */
 .card-sticker {
   position: absolute;
   top: 12px;
@@ -573,14 +215,14 @@
   font-size: 0.75rem;
   font-weight: 800;
   padding: 3px 8px;
-  border-radius: 4px;
+  border-radius: var(--radius-sm);
   letter-spacing: -0.01em;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
   z-index: 2;
 }
 
 .card-sticker.yellow {
-  background-color: #F6D049;
+  background-color: var(--brand-yellow);
   color: #18181B;
 }
 
@@ -594,7 +236,7 @@
   font-size: 0.7rem;
   font-weight: 600;
   padding: 3px 8px;
-  border-radius: 4px;
+  border-radius: var(--radius-sm);
   z-index: 2;
 }
 
@@ -616,7 +258,7 @@
 }
 
 .card-provider {
-  color: #52525B;
+  color: var(--text-secondary);
   font-weight: 500;
   display: inline-flex;
   align-items: center;
@@ -627,13 +269,13 @@
 }
 
 .provider-dot {
-  color: #166534;
+  color: var(--status-verified);
   font-size: 0.65rem;
 }
 
 .card-rating {
   font-weight: 700;
-  color: #18181B;
+  color: var(--text-primary);
   display: inline-flex;
   align-items: center;
   gap: 2px;
@@ -645,7 +287,7 @@
 
 .rating-count {
   font-weight: 400;
-  color: #71717A;
+  color: var(--text-muted);
   margin-left: 2px;
 }
 
@@ -654,7 +296,7 @@
   font-size: 1.05rem;
   font-weight: 700;
   line-height: 1.35;
-  color: #18181B;
+  color: var(--text-primary);
   letter-spacing: -0.015em;
   margin-bottom: 8px;
   display: -webkit-box;
@@ -675,16 +317,16 @@
 
 .skill-chip {
   font-size: 0.75rem;
-  background-color: #F4F4F6;
-  color: #52525B;
+  background-color: var(--neutral-subtle);
+  color: var(--text-secondary);
   padding: 2px 8px;
-  border-radius: 4px;
+  border-radius: var(--radius-sm);
   font-weight: 500;
 }
 
 .skill-chip.violet {
-  background-color: #F0EDFB;
-  color: #18181B;
+  background-color: var(--brand-lilac-subtle);
+  color: var(--text-primary);
   font-weight: 600;
 }
 
@@ -693,11 +335,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-top: 1px solid #F4F4F6;
+  border-top: 1px solid var(--neutral-subtle);
   padding-top: 12px;
   margin-top: auto;
   font-size: 0.775rem;
-  color: #71717A;
+  color: var(--text-muted);
 }
 
 .card-meta-group {
@@ -716,9 +358,9 @@
   background: none;
   border: none;
   cursor: pointer;
-  color: #71717A;
+  color: var(--text-muted);
   padding: 4px;
-  border-radius: 4px;
+  border-radius: var(--radius-sm);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -726,16 +368,16 @@
 }
 
 .btn-bookmark:hover {
-  color: #18181B;
-  background-color: #F4F4F6;
+  color: var(--text-primary);
+  background-color: var(--neutral-subtle);
 }
 
 .btn-bookmark.bookmarked {
-  color: #18181B;
+  color: var(--text-primary);
 }
 
 .btn-bookmark.bookmarked svg {
-  fill: #18181B;
+  fill: var(--text-primary);
 }
 
 /* Empty State in Card Grid */
@@ -744,25 +386,25 @@
   text-align: center;
   padding: 4rem 1rem;
   background-color: #FFFFFF;
-  border: 1px dashed #E4E4E7;
-  border-radius: 12px;
+  border: 1px dashed var(--border-subtle);
+  border-radius: var(--radius-xl);
 }
 
 .dash-empty-title {
   font-size: 1.2rem;
   font-weight: 700;
-  color: #18181B;
+  color: var(--text-primary);
   margin-bottom: 6px;
 }
 
 .dash-empty-text {
   font-size: 0.95rem;
-  color: #52525B;
+  color: var(--text-secondary);
   margin-bottom: 1.25rem;
 }
 
 /* ------------------------------------------------------------
-   5. RESPONSIVE BREAKPOINTS
+   3. RESPONSIVE BREAKPOINTS
    ------------------------------------------------------------ */
 @media (max-width: 1100px) {
   .dash-layout-container {
@@ -792,20 +434,9 @@
     flex-wrap: wrap;
     gap: 6px;
   }
-  .category-nav-item.active button {
-    border-left: none;
-    border-bottom: 2px solid #9D8DE2;
-    padding-left: 12px;
-  }
-  .dash-nav-center {
-    display: none;
-  }
 }
 
 @media (max-width: 600px) {
-  .dash-nav-inner {
-    padding: 0.75rem 1rem;
-  }
   .cards-grid-3col {
     grid-template-columns: 1fr;
   }

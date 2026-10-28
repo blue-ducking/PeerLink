@@ -9,108 +9,9 @@
   <link rel="stylesheet" href="/css/dashboard.css">
 </head>
 <body>
-  <!-- Skillshare-Style Dark Top Bar with Violet Accent -->
-  <header class="site-header dash-dark-header">
-    <div class="dash-nav-inner">
-      <!-- Left: Brand & Browse -->
-      <div class="dash-nav-left">
-        <a href="/dashboard.html" class="dash-brand-logo">peerlink<span class="brand-dot">.</span></a>
-        
-        <button type="button" class="dash-browse-btn" id="btn-browse-toggle" aria-expanded="false" aria-haspopup="true">
-          <span>Browse</span>
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="6 9 12 15 18 9"></polyline>
-          </svg>
-        </button>
-
-        <a href="/listings.html" class="dash-nav-link">Campus Feed</a>
-      </div>
-
-      <!-- Center: Wide Search Input -->
-      <div class="dash-nav-center">
-        <div class="dash-search-container">
-          <svg class="dash-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="11" cy="11" r="8"></circle>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-          </svg>
-          <input type="search" id="dash-header-search-input" class="dash-header-search" placeholder="Search skills, tutoring, campus services, peers... (Press Enter)" autocomplete="off">
-        </div>
-      </div>
-
-      <!-- Right: Requests, Bell, Avatar & Violet CTA -->
-      <div class="dash-nav-right">
-        <a href="/requests.html" class="dash-nav-link">My Requests</a>
-
-        <button type="button" class="dash-bell-btn" id="btn-notifications" aria-label="Notifications">
-          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
-            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
-          </svg>
-          <span class="bell-badge-dot" aria-hidden="true"></span>
-        </button>
-
-        <!-- Circular User Avatar -->
-        <button type="button" class="dash-avatar-btn" id="btn-avatar-toggle" aria-expanded="false" aria-haspopup="true" title="User Menu">
-          <span id="nav-avatar-initials">ST</span>
-        </button>
-
-        <!-- Violet "Offer a Skill +" Primary Button -->
-        <a href="/listings.html" class="dash-cta-btn" id="btn-post-service">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="12" y1="5" x2="12" y2="19"></line>
-            <line x1="5" y1="12" x2="19" y2="12"></line>
-          </svg>
-          <span>Offer a Skill</span>
-        </a>
-
-        <!-- Skillshare-Style Floating Profile Popover Dropdown Card -->
-        <div class="profile-popover-menu" id="profile-popover-menu" role="menu">
-          <div class="popover-header">
-            <div class="popover-avatar-lg">
-              <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#18181B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                <circle cx="12" cy="7" r="4"></circle>
-              </svg>
-            </div>
-            <h3 class="popover-name" id="popover-user-name">Loading Student...</h3>
-            <p class="popover-headline" id="popover-user-headline">Computer Science · 2nd Year</p>
-            <a href="/profile.html" class="popover-btn-profile">View Profile</a>
-          </div>
-
-          <div class="popover-divider"></div>
-
-          <ul class="popover-nav-list">
-            <li class="popover-nav-item">
-              <a href="/requests.html">
-                <span>My Requests</span>
-                <span class="meta-tag" id="popover-requests-count">0</span>
-              </a>
-            </li>
-            <li class="popover-nav-item">
-              <a href="/skills.html">
-                <span>My Skills Catalog</span>
-                <span class="meta-tag" id="popover-skills-count">0</span>
-              </a>
-            </li>
-            <li class="popover-nav-item">
-              <a href="/profile.html">
-                <span>Verification</span>
-                <span class="popover-status-badge" id="popover-verification-badge">● Verified</span>
-              </a>
-            </li>
-            <li class="popover-nav-item">
-              <a href="/ai.html">
-                <span>AI Campus Matchmaker</span>
-              </a>
-            </li>
-          </ul>
-
-          <div class="popover-divider"></div>
-
-          <button type="button" class="popover-logout-btn" id="popover-btn-logout">Sign Out</button>
-        </div>
-      </div>
-    </div>
+  <!-- Global Unified Skillshare-Style Dark Header with Violet Accent -->
+  <header class="site-header">
+    <nav id="main-nav" aria-label="Main Navigation"></nav>
   </header>
 
   <!-- Main Dashboard Surface: Left Sidebar + Right 3-Column Card Grid -->
@@ -124,7 +25,7 @@
           <li class="category-nav-item active">
             <button type="button" data-category-id="all">
               <span>All Offerings</span>
-              <span class="meta-tag" id="count-all-categories">5</span>
+              <span class="meta-tag" id="count-all-categories">-</span>
             </button>
           </li>
           <!-- Dynamic categories populated by dashboard.js -->

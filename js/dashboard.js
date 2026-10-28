@@ -4,19 +4,7 @@
 
 document.addEventListener('DOMContentLoaded', async () => {
   window.auth.enforceAuthGuard();
-
-  // Top Nav & Popover Elements
-  const avatarBtn = document.getElementById('btn-avatar-toggle');
-  const popoverMenu = document.getElementById('profile-popover-menu');
-  const navInitials = document.getElementById('nav-avatar-initials');
-  const popoverName = document.getElementById('popover-user-name');
-  const popoverHeadline = document.getElementById('popover-user-headline');
-  const popoverBadge = document.getElementById('popover-verification-badge');
-  const popoverSkillsCount = document.getElementById('popover-skills-count');
-  const popoverRequestsCount = document.getElementById('popover-requests-count');
-  const popoverLogoutBtn = document.getElementById('popover-btn-logout');
-  const searchInput = document.getElementById('dash-header-search-input');
-  const browseToggleBtn = document.getElementById('btn-browse-toggle');
+  window.auth.updateNavigation('dashboard');
 
   // Sidebar & Grid Elements
   const categoryNavList = document.getElementById('category-nav-list');
@@ -32,70 +20,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   let allCategories = [];
   let currentCategoryId = 'all';
 
-  // --- 1. Toggle Profile Popover Menu ---
-  if (avatarBtn && popoverMenu) {
-    avatarBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const isOpen = popoverMenu.classList.contains('is-open');
-      popoverMenu.classList.toggle('is-open', !isOpen);
-      avatarBtn.setAttribute('aria-expanded', String(!isOpen));
-    });
-
-    document.addEventListener('click', (e) => {
-      if (!popoverMenu.contains(e.target) && e.target !== avatarBtn) {
-        popoverMenu.classList.remove('is-open');
-        avatarBtn.setAttribute('aria-expanded', 'false');
-      }
-    });
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && popoverMenu.classList.contains('is-open')) {
-        popoverMenu.classList.remove('is-open');
-        avatarBtn.setAttribute('aria-expanded', 'false');
-        avatarBtn.focus();
-      }
-    });
-  }
-
-  if (popoverLogoutBtn) {
-    popoverLogoutBtn.addEventListener('click', () => {
-      window.api.logout();
-    });
-  }
-
-  // --- 2. Browse Button Scrolls to Category Sidebar on Mobile/Desktop ---
-  if (browseToggleBtn && categoryNavList) {
-    browseToggleBtn.addEventListener('click', () => {
-      categoryNavList.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-  }
-
-  // --- 3. Search Bar Interaction ---
-  if (searchInput) {
-    searchInput.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        const query = searchInput.value.trim().toLowerCase();
-        if (!query) {
-          renderListings(allListings);
-          currentCategoryTitle.textContent = 'Popular Offerings';
-          return;
-        }
-
-        const filtered = allListings.filter(l =>
-          l.title.toLowerCase().includes(query) ||
-          l.description.toLowerCase().includes(query) ||
-          (l.skill_name && l.skill_name.toLowerCase().includes(query)) ||
-          (l.category_name && l.category_name.toLowerCase().includes(query)) ||
-          l.provider_name.toLowerCase().includes(query)
-        );
-
-        currentCategoryTitle.textContent = `Search results for "${searchInput.value.trim()}"`;
-        renderListings(filtered);
-      }
-    });
-  }
-
-  // --- 4. SVG Geometric Banner Generator (Violet & Warm Yellow Palette) ---
+  // --- 1. SVG Geometric Banner Generator (Violet & Warm Yellow Palette) ---
   function getBannerSvg(categoryId, index) {
     const banners = [
       // Banner 1: Violet Lilac Spotlight & Geometric Angles
@@ -138,7 +63,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     return banners[idx];
   }
 
-  // --- 5. Render 3-Column Card Grid ---
+  // --- 2. Render 3-Column Card Grid ---
   function renderListings(listings) {
     if (!cardsGrid) return;
 
@@ -228,7 +153,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   }
 
-  // --- 6. Category Filter Trigger ---
+  // --- 3. Category Filter Trigger ---
   function filterByCategory(categoryId, categoryName) {
     currentCategoryId = categoryId;
 
@@ -252,39 +177,44 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   }
 
-  // --- 7. Load Data from Backend ---
+  // --- 4. Intercept search enter on dashboard for instant in-page filtering ---
+  const headerSearchInput = document.getElementById('dash-header-search-input');
+  if (headerSearchInput) {
+    headerSearchInput.addEventListener('input', () => {
+      const query = headerSearchInput.value.trim().toLowerCase();
+      if (!query) {
+        if (currentCategoryId === 'all') {
+          currentCategoryTitle.textContent = 'Popular Offerings';
+          renderListings(allListings);
+        } else {
+          const cat = allCategories.find(c => String(c.category_id) === String(currentCategoryId));
+          filterByCategory(currentCategoryId, cat ? cat.name : 'Campus');
+        }
+        return;
+      }
+
+      const filtered = allListings.filter(l =>
+        l.title.toLowerCase().includes(query) ||
+        l.description.toLowerCase().includes(query) ||
+        (l.skill_name && l.skill_name.toLowerCase().includes(query)) ||
+        (l.category_name && l.category_name.toLowerCase().includes(query)) ||
+        l.provider_name.toLowerCase().includes(query)
+      );
+
+      currentCategoryTitle.textContent = `Search results for "${headerSearchInput.value.trim()}"`;
+      renderListings(filtered);
+    });
+  }
+
+  // --- 5. Load Data from Backend ---
   try {
-    // 1. Current User Identity
     const meRes = await window.api.get('/auth/me');
     const user = meRes.data.user;
-    const profile = meRes.data.profile;
 
-    if (user && profile) {
-      const initials = (profile.name || user.university_id)
-        .split(' ')
-        .map(n => n[0])
-        .slice(0, 2)
-        .join('')
-        .toUpperCase();
-
-      if (navInitials) navInitials.textContent = initials;
-      if (popoverName) popoverName.textContent = profile.name || user.university_id;
-      if (popoverHeadline) {
-        const dept = profile.department || 'Student';
-        const year = profile.year ? `Year ${profile.year}` : 'Undergrad';
-        popoverHeadline.textContent = `${dept} · ${year}`;
-      }
-      if (popoverBadge) {
-        popoverBadge.textContent = user.verification_status === 'VERIFIED' ? '● Verified' : '● Pending';
-      }
-    }
-
-    // 2. Fetch User Stats
+    // Fetch User Stats for sidebar
     try {
       const skillsRes = await window.api.get('/skills/my');
-      const sCount = skillsRes.data?.length || 0;
-      if (statSkills) statSkills.textContent = sCount;
-      if (popoverSkillsCount) popoverSkillsCount.textContent = sCount;
+      if (statSkills) statSkills.textContent = skillsRes.data?.length || 0;
     } catch {
       if (statSkills) statSkills.textContent = '0';
     }
@@ -298,20 +228,17 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     try {
       const reqRes = await window.api.get('/requests');
-      const rCount = reqRes.data?.length || 0;
-      if (statRequests) statRequests.textContent = rCount;
-      if (popoverRequestsCount) popoverRequestsCount.textContent = rCount;
+      if (statRequests) statRequests.textContent = reqRes.data?.length || 0;
     } catch {
       if (statRequests) statRequests.textContent = '0';
     }
 
-    // 3. Fetch Categories
+    // Fetch Categories
     try {
       const catRes = await window.api.get('/skills/categories');
       allCategories = catRes.data || [];
 
       if (categoryNavList && allCategories.length > 0) {
-        // Keep the "All Offerings" button
         const allBtnHtml = `
           <li class="category-nav-item active">
             <button type="button" data-category-id="all">
@@ -331,7 +258,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         categoryNavList.innerHTML = allBtnHtml + categoriesHtml;
 
-        // Attach category click listeners
         categoryNavList.querySelectorAll('button').forEach(btn => {
           btn.addEventListener('click', () => {
             const catId = btn.getAttribute('data-category-id');
@@ -344,7 +270,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       console.warn('Failed to load categories:', err);
     }
 
-    // 4. Fetch All Active Listings
+    // Fetch All Active Listings
     try {
       const listRes = await window.api.get('/listings');
       allListings = listRes.data || [];
