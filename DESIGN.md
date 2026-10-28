@@ -19,6 +19,11 @@ colors:
   status-pending-bg: "#fefce8"
   status-rejected: "#991b1b"
   status-rejected-bg: "#fef2f2"
+  auth-canvas: "#b5a5ec"
+  auth-facet: "#9d8de2"
+  auth-yellow: "#f6d049"
+  auth-card-bg: "#ffffff"
+  auth-text-dark: "#18181b"
 typography:
   font-family: "'Mona Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
   display:
@@ -59,6 +64,8 @@ rounded:
   sm: "4px"
   md: "6px"
   lg: "8px"
+  xl: "12px"
+  xxl: "20px"
 spacing:
   xs: "4px"
   sm: "8px"
@@ -82,15 +89,18 @@ components:
 ---
 
 ## Overview
-PeerLink's design language draws inspiration from Mona Sans and GitHub's editorial product aesthetic. It eschews generic "boxed CRUD card" tropes in favor of spacious typography, subtle horizontal rules, intentional whitespace, and crisp, restrained hierarchy.
+PeerLink's design language draws inspiration from Mona Sans, GitHub's editorial product aesthetic, and the Deel authentication reference (`LogIn.png`). It balances spacious editorial layouts with a distinctive lilac split-canvas authentication world, white floating cards, and sharp typography.
 
 ## Colors
-- **Canvas (`neutral-bg`)**: `#f8fafc` — crisp, clean light canvas.
-- **Surface (`neutral-surface`)**: `#ffffff` — clean content background.
-- **Primary Text (`text-primary`)**: `#0f172a` — deep slate for high contrast (passes WCAG AAA).
-- **Secondary Text (`text-secondary`)**: `#475569` — balanced contrast (passes WCAG AA ≥ 4.5:1).
-- **Borders (`border-subtle`, `border-strong`)**: `#e2e8f0` and `#cbd5e1` — minimal 1px hairline dividers.
-- **Primary Action (`primary`)**: `#1e293b` with hover `#0f172a` — understated authority.
+- **Canvas (`neutral-bg`)**: `#f8fafc` — crisp, clean light canvas for internal dashboard views.
+- **Auth Canvas (`auth-canvas`)**: `#b5a5ec` — soft lilac purple canvas directly inspired by `LogIn.png`.
+- **Auth Facet (`auth-facet`)**: `#9d8de2` — angled geometric facet shade for visual momentum.
+- **Surface (`neutral-surface` / `auth-card-bg`)**: `#ffffff` — clean floating card background.
+- **Primary Text (`text-primary` / `auth-text-dark`)**: `#18181b` — deep charcoal slate for high contrast.
+- **Secondary Text (`text-secondary`)**: `#475569` and `#71717a` — balanced readable contrast (≥ 4.5:1).
+- **Accent Yellow (`auth-yellow`)**: `#f6d049` / `#fde047` — vibrant task chair and lamp accent.
+- **Borders (`border-subtle`, `border-strong`)**: `#e2e8f0` and `#e4e4e7` — minimal hairline dividers.
+- **Primary Action (`primary`)**: `#18181b` with hover `#27272a`.
 - **Accent Link (`accent`)**: `#2563eb` — focused interactive cues.
 
 ## Typography
