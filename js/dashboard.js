@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         <div class="dash-empty-state">
           <h3 class="dash-empty-title">No offerings found</h3>
           <p class="dash-empty-text">No active peer listings match this category yet. Be the first to post!</p>
-          <a href="/listings.html" class="dash-cta-btn">Offer a Skill on Campus +</a>
+          <a href="/features.html" class="dash-cta-btn">Offer a Skill on Campus +</a>
         </div>
       `;
       return;
@@ -132,7 +132,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       `;
     }).join('');
 
-    // Attach card click handlers
+    // Attach card click handlers (leads to features.html)
     document.querySelectorAll('.peer-card').forEach(card => {
       card.addEventListener('click', (e) => {
         // Prevent click if bookmark button was clicked
@@ -145,10 +145,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           return;
         }
 
-        const id = card.getAttribute('data-listing-id');
-        if (id) {
-          window.location.href = `/listing-details.html?id=${id}`;
-        }
+        window.location.href = '/features.html';
       });
     });
   }
@@ -226,12 +223,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       if (statListings) statListings.textContent = '0';
     }
 
-    try {
-      const reqRes = await window.api.get('/requests');
-      if (statRequests) statRequests.textContent = reqRes.data?.length || 0;
-    } catch {
-      if (statRequests) statRequests.textContent = '0';
-    }
+    if (statRequests) statRequests.textContent = '0';
 
     // Fetch Categories
     try {

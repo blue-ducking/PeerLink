@@ -3,20 +3,18 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const path = require('path');
 const dotenv = require('dotenv');
+const jwt = require('jsonwebtoken');
 
 dotenv.config();
 
+const JWT_SECRET = process.env.JWT_SECRET || 'peerlink_super_secure_jwt_dev_secret_key_2026';
 const { testConnection } = require('./config/database');
 const { errorHandler, notFoundHandler } = require('./middleware/error.middleware');
 
-// Route modules
+// Core Route modules
 const authRoutes = require('./routes/auth.routes');
-const profileRoutes = require('./routes/profile.routes');
 const skillsRoutes = require('./routes/skills.routes');
 const listingsRoutes = require('./routes/listings.routes');
-const searchRoutes = require('./routes/search.routes');
-const requestsRoutes = require('./routes/requests.routes');
-const aiRoutes = require('./routes/ai.routes');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -30,20 +28,46 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-// Static Assets: Serve client pages, CSS, and JS
+// Project Root
 const projectRoot = path.resolve(__dirname, '..');
+
+// Root & Index session redirection (Server-side cookie check)
+app.get(['/', '/index.html'], (req, res, next) => {
+  const token = req.cookies?.token;
+  if (token) {
+    try {
+      jwt.verify(token, JWT_SECRET);
+      return res.redirect('/dashboard.html');
+    } catch {
+      // Invalid/expired token cookie, serve index.html to allow client script resolution
+    }
+  }
+  res.sendFile(path.join(projectRoot, 'client', 'index.html'));
+});
+
+// Redirect non-core feature pages to features.html
+app.get([
+  '/profile.html', '/profile',
+  '/requests.html', '/requests',
+  '/listings.html', '/listings',
+  '/listing-details.html',
+  '/skills.html', '/skills',
+  '/search.html', '/search',
+  '/ai.html', '/ai',
+  '/feature.html', '/feature'
+], (req, res) => {
+  res.redirect('/features.html');
+});
+
+// Static Assets: Serve client pages, CSS, and JS
 app.use('/css', express.static(path.join(projectRoot, 'css')));
 app.use('/js', express.static(path.join(projectRoot, 'js')));
 app.use(express.static(path.join(projectRoot, 'client')));
 
-// API Routes
+// API Routes (Core Foundation & Dashboard Support)
 app.use('/api/auth', authRoutes);
-app.use('/api/profile', profileRoutes);
 app.use('/api/skills', skillsRoutes);
 app.use('/api/listings', listingsRoutes);
-app.use('/api/search', searchRoutes);
-app.use('/api/requests', requestsRoutes);
-app.use('/api/ai', aiRoutes);
 
 // Base API health check
 app.get('/api/health', async (req, res) => {
@@ -54,11 +78,6 @@ app.get('/api/health', async (req, res) => {
     service: 'PeerLink Core Prototype API',
     database: dbStatus
   });
-});
-
-// Root route redirect to landing page
-app.get('/', (req, res) => {
-  res.sendFile(path.join(projectRoot, 'client', 'index.html'));
 });
 
 // Centralized Error Handling

@@ -39,7 +39,7 @@ function updateNavigation(activeKey = '') {
           ${user?.role === 'admin' ? `
             <a href="/admin.html" class="dash-nav-link ${activeKey === 'admin' ? 'active' : ''}" style="color: #9D8DE2; font-weight: 700;">Admin Console</a>
           ` : ''}
-          <a href="/requests.html" class="dash-nav-link ${activeKey === 'requests' ? 'active' : ''}">My Requests</a>
+          <a href="/features.html" class="dash-nav-link ${activeKey === 'requests' ? 'active' : ''}">My Requests</a>
 
           <button type="button" class="dash-bell-btn" id="btn-notifications" aria-label="Notifications" title="Notifications">
             <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -55,7 +55,7 @@ function updateNavigation(activeKey = '') {
           </button>
 
           <!-- Violet "Offer a Skill +" Primary Button -->
-          <a href="/listings.html" class="dash-cta-btn" id="btn-post-service">
+          <a href="/features.html" class="dash-cta-btn" id="btn-post-service">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <line x1="12" y1="5" x2="12" y2="19"></line>
               <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -74,7 +74,7 @@ function updateNavigation(activeKey = '') {
               </div>
               <h3 class="popover-name" id="popover-user-name">${user?.universityId || 'Student'}</h3>
               <p class="popover-headline" id="popover-user-headline">Loading details...</p>
-              <a href="/profile.html" class="popover-btn-profile">View Profile</a>
+              <a href="/features.html" class="popover-btn-profile">View Profile</a>
             </div>
 
             <div class="popover-divider"></div>
@@ -89,19 +89,19 @@ function updateNavigation(activeKey = '') {
                 </li>
               ` : ''}
               <li class="popover-nav-item">
-                <a href="/requests.html">
+                <a href="/features.html">
                   <span>My Requests</span>
                   <span class="meta-tag" id="popover-requests-count">-</span>
                 </a>
               </li>
               <li class="popover-nav-item">
-                <a href="/skills.html">
+                <a href="/features.html">
                   <span>My Skills Catalog</span>
                   <span class="meta-tag" id="popover-skills-count">-</span>
                 </a>
               </li>
               <li class="popover-nav-item">
-                <a href="/profile.html">
+                <a href="${user?.role === 'admin' ? '/admin.html' : '/features.html'}">
                   <span>Verification</span>
                   <span class="popover-status-badge" id="popover-verification-badge">
                     ${user?.verificationStatus === 'VERIFIED' ? '● Verified' : '● Pending'}
@@ -109,7 +109,7 @@ function updateNavigation(activeKey = '') {
                 </a>
               </li>
               <li class="popover-nav-item">
-                <a href="/ai.html">
+                <a href="/features.html">
                   <span>AI Campus Matchmaker</span>
                 </a>
               </li>
@@ -127,6 +127,13 @@ function updateNavigation(activeKey = '') {
     const avatarBtn = document.getElementById('btn-avatar-toggle');
     const popoverMenu = document.getElementById('profile-popover-menu');
     const popoverLogoutBtn = document.getElementById('popover-btn-logout');
+    const notifBtn = document.getElementById('btn-notifications');
+
+    if (notifBtn) {
+      notifBtn.addEventListener('click', () => {
+        window.location.href = '/features.html';
+      });
+    }
 
     if (avatarBtn && popoverMenu) {
       avatarBtn.addEventListener('click', (e) => {
@@ -158,14 +165,14 @@ function updateNavigation(activeKey = '') {
       });
     }
 
-    // Attach search enter key event
+    // Attach search enter key event (redirects to features page)
     const searchInput = document.getElementById('dash-header-search-input');
     if (searchInput) {
       searchInput.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') {
           const query = searchInput.value.trim();
           if (query) {
-            window.location.href = `/search.html?q=${encodeURIComponent(query)}`;
+            window.location.href = '/features.html';
           }
         }
       });
@@ -214,11 +221,8 @@ function updateNavigation(activeKey = '') {
           if (skillsCountEl) skillsCountEl.textContent = skillsRes.data?.length || 0;
         } catch { /* ignore */ }
 
-        try {
-          const reqRes = await window.api.get('/requests');
-          const reqCountEl = document.getElementById('popover-requests-count');
-          if (reqCountEl) reqCountEl.textContent = reqRes.data?.length || 0;
-        } catch { /* ignore */ }
+        const reqCountEl = document.getElementById('popover-requests-count');
+        if (reqCountEl) reqCountEl.textContent = '0';
 
       } catch { /* session might still be active */ }
     })();
@@ -254,7 +258,7 @@ function updateNavigation(activeKey = '') {
         if (e.key === 'Enter') {
           const query = searchInput.value.trim();
           if (query) {
-            window.location.href = `/search.html?q=${encodeURIComponent(query)}`;
+            window.location.href = '/features.html';
           }
         }
       });

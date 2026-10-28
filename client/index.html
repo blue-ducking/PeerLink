@@ -3,52 +3,44 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PeerLink — Your Campus. Your People. Your Resources.</title>
+  <title>PeerLink — Redirecting...</title>
+  
+  <!-- Immediate session-based redirection to Dashboard (if logged in) or Login (if no session) -->
+  <script src="/js/api.js"></script>
+  <script>
+    (function() {
+      try {
+        if (window.api && window.api.isLoggedIn()) {
+          window.location.replace('/dashboard.html');
+        } else {
+          window.location.replace('/login.html');
+        }
+      } catch (err) {
+        window.location.replace('/login.html');
+      }
+    })();
+  </script>
+
   <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="/css/components.css">
 </head>
 <body>
+  <!-- Fallback surface if JavaScript redirection is pending or disabled -->
   <header class="site-header">
     <nav id="main-nav" aria-label="Main Navigation"></nav>
   </header>
 
   <main class="main-content">
-    <section class="landing-hero" style="padding: 4.5rem 0 3rem 0;">
-      <h1 style="font-size: 3.25rem; line-height: 1.25; margin-bottom: 1.5rem; letter-spacing: -0.035em;">
-        Your campus.<br>Your people.<br><span class="highlight-sticker">Your resources.</span>
+    <section class="landing-hero" style="padding: 4.5rem 0 3rem 0; text-align: center;">
+      <h1 style="font-size: 2.75rem; line-height: 1.25; margin-bottom: 1.5rem; letter-spacing: -0.03em;">
+        PeerLink<span class="brand-dot" style="color: #6366f1;">.</span>
       </h1>
-      <p style="font-size: 1.25rem; color: var(--text-secondary); max-width: 58ch; margin-bottom: 2.5rem; line-height: 1.6;">
-        PeerLink connects university students with other students who can provide skills, tutoring, project help, and services within the campus community.
+      <p style="font-size: 1.15rem; color: var(--text-secondary); max-width: 50ch; margin: 0 auto 2.5rem auto; line-height: 1.6;">
+        Redirecting based on your session... If not redirected automatically, please choose below:
       </p>
-      <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
-        <a href="/login.html#register" class="btn btn-primary" style="padding: 12px 24px; font-size: 1rem; border-radius: 8px;">Join PeerLink →</a>
+      <div style="display: flex; gap: 1rem; align-items: center; justify-content: center; flex-wrap: wrap;">
+        <a href="/dashboard.html" class="btn btn-primary" style="padding: 12px 24px; font-size: 1rem; border-radius: 8px;">Go to Dashboard →</a>
         <a href="/login.html" class="btn btn-secondary" style="padding: 12px 24px; font-size: 1rem; border-radius: 8px;">Student Login</a>
-      </div>
-    </section>
-
-    <div style="border-top: 1px solid var(--border-subtle); margin: 3rem 0;"></div>
-
-    <section style="margin-bottom: 4rem;">
-      <h2 style="font-size: 1.25rem; font-weight: 600; margin-top: 0; margin-bottom: 1.5rem;">What can you find on campus?</h2>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
-        <div>
-          <h3 style="font-size: 1.05rem; margin-bottom: 0.5rem;">Skills & Mentorship</h3>
-          <p style="font-size: 0.95rem; color: var(--text-secondary);">
-            Learn directly from senior students in Python, Android Studio, UI/UX in Figma, and calculus exam preparation.
-          </p>
-        </div>
-        <div>
-          <h3 style="font-size: 1.05rem; margin-bottom: 0.5rem;">Verified Student Identity</h3>
-          <p style="font-size: 0.95rem; color: var(--text-secondary);">
-            Every account is tied to an authorized University ID, keeping peer collaboration safe, trusted, and campus-exclusive.
-          </p>
-        </div>
-        <div>
-          <h3 style="font-size: 1.05rem; margin-bottom: 0.5rem;">Direct Peer Requests</h3>
-          <p style="font-size: 0.95rem; color: var(--text-secondary);">
-            Submit structured requests directly to student providers. No middleman, no fees, no external ad networks.
-          </p>
-        </div>
       </div>
     </section>
   </main>
@@ -57,6 +49,7 @@
     <div class="footer-inner">
       <p>© 2026 PeerLink Platform · University Capstone Prototype</p>
       <ul class="footer-links">
+        <li><a href="/dashboard.html">Dashboard</a></li>
         <li><a href="/login.html">Login</a></li>
         <li><a href="/register.html">Register</a></li>
         <li><a href="/api/health" target="_blank">API Health</a></li>
@@ -64,11 +57,12 @@
     </div>
   </footer>
 
-  <script src="/js/api.js"></script>
   <script src="/js/auth.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      window.auth.updateNavigation('home');
+      if (window.auth && typeof window.auth.updateNavigation === 'function') {
+        window.auth.updateNavigation('home');
+      }
     });
   </script>
 </body>
