@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feature in Progress — PeerLink</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/dashboard.css">
+  <style>
+    .feature-container {
+      max-width: 760px;
+      margin: 4rem auto;
+      padding: 0 1.5rem;
+      text-align: center;
+    }
+    .feature-card {
+      background: #ffffff;
+      border: 1px solid var(--border-subtle, #e4e4e7);
+      border-radius: 20px;
+      padding: 3.5rem 2.5rem;
+      box-shadow: 0 20px 40px -15px rgba(30, 27, 75, 0.08);
+      position: relative;
+      overflow: hidden;
+    }
+    .feature-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 6px;
+      background: linear-gradient(90deg, #9d8de2, #f6d049, #6366f1);
+    }
+    .feature-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: #f0edfb;
+      color: #5b21b6;
+      border: 1px solid #d6cef8;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      margin-bottom: 1.5rem;
+    }
+    .feature-title {
+      font-size: 2.25rem;
+      font-weight: 800;
+      color: #18181b;
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+    .feature-desc {
+      font-size: 1.1rem;
+      color: #52525b;
+      line-height: 1.6;
+      max-width: 580px;
+      margin: 0 auto 2rem auto;
+    }
+    .feature-active-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      margin: 0 auto 2.5rem auto;
+      text-align: left;
+      max-width: 540px;
+    }
+    .feature-active-box h4 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #71717a;
+      margin: 0 0 0.75rem 0;
+    }
+    .feature-active-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.6rem;
+    }
+    .feature-active-list li {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: #18181b;
+    }
+    .feature-actions {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .btn-return-dash {
+      background: #18181b;
+      color: #ffffff;
+      padding: 12px 24px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: background 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .btn-return-dash:hover {
+      background: #27272a;
+    }
+    .btn-admin-verify {
+      background: #f0edfb;
+      color: #5b21b6;
+      border: 1px solid #d6cef8;
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .btn-admin-verify:hover {
+      background: #e4ddfa;
+    }
+  </style>
+</head>
+<body>
+  <!-- Global Unified Skillshare-Style Dark Header with Violet Accent -->
+  <header class="site-header">
+    <nav id="main-nav" aria-label="Main Navigation"></nav>
+  </header>
+
+  <main class="feature-container">
+    <div class="feature-card">
+      <div class="feature-pill">
+        <span>🚀 Feature In Progress</span>
+      </div>
+
+      <h1 class="feature-title" id="feature-heading">Feature Under Development</h1>
+      
+      <p class="feature-desc" id="feature-message">
+        This section is currently being developed for our upcoming release. The core functional modules of PeerLink are live and operational.
+      </p>
+
+      <div class="feature-active-box">
+        <h4>Available Functional Modules</h4>
+        <ul class="feature-active-list">
+          <li><span style="color: #16a34a;">✓</span> Campus Dashboard</li>
+          <li><span style="color: #16a34a;">✓</span> Student Registration</li>
+          <li><span style="color: #16a34a;">✓</span> User Authentication</li>
+          <li><span style="color: #16a34a;">✓</span> Student Verification</li>
+        </ul>
+      </div>
+
+      <div class="feature-actions">
+        <a href="/dashboard.html" class="btn-return-dash">
+          ← Back to Dashboard
+        </a>
+        <a href="/admin.html" class="btn-admin-verify" id="admin-verify-btn" style="display: none;">
+          🛡️ Student Verification
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p>© 2026 PeerLink · Closed-Campus Peer Collaboration Network</p>
+      <ul class="footer-links">
+        <li><a href="/dashboard.html">Dashboard</a></li>
+        <li><a href="/login.html">Login</a></li>
+        <li><a href="/register.html">Register</a></li>
+        <li><a href="/admin.html">Admin Verification</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Update dynamic navigation header
+      window.auth.updateNavigation('');
+
+      const user = window.api ? window.api.getUser() : null;
+      if (user && user.role === 'admin') {
+        const adminBtn = document.getElementById('admin-verify-btn');
+        if (adminBtn) adminBtn.style.display = 'inline-flex';
+      }
+
+      // Dynamic message customization based on query params or path
+      const params = new URLSearchParams(window.location.search);
+      const featureName = params.get('name') || params.get('f');
+      if (featureName) {
+        const heading = document.getElementById('feature-heading');
+        const msg = document.getElementById('feature-message');
+        if (heading) heading.textContent = `${featureName} — In Progress`;
+        if (msg) msg.textContent = `The ${featureName} module is currently under development. Please visit the active modules below.`;
+      }
+    });
+  </script>
+</body>
+</html>
