@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — PeerLink</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav id="main-nav" aria-label="Main Navigation"></nav>
+  </header>
+
+  <main class="main-content">
+    <section class="dashboard-hero">
+      <h1 id="dashboard-greeting" class="dashboard-greeting">Good day, Student.</h1>
+      <p style="font-size: 1.15rem; color: var(--text-secondary); margin-bottom: 1.5rem;">What are you looking for?</p>
+
+      <div class="dashboard-search-wrap">
+        <label for="dashboard-quick-search" class="visually-hidden" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0);">Search campus services</label>
+        <input type="search" id="dashboard-quick-search" class="dashboard-search-input" placeholder="Search for skills, tutoring, or campus services... (Press Enter)">
+      </div>
+    </section>
+
+    <!-- Activity Strip -->
+    <section class="activity-section">
+      <h2 class="activity-heading">Your Campus Activity</h2>
+      <div class="activity-strip">
+        <div class="activity-metric">
+          <span id="stat-skills" class="metric-number">-</span>
+          <span class="metric-label">Skills Listed</span>
+        </div>
+        <div class="activity-metric">
+          <span id="stat-listings" class="metric-number">-</span>
+          <span class="metric-label">Service Offerings</span>
+        </div>
+        <div class="activity-metric">
+          <span id="stat-requests" class="metric-number">-</span>
+          <span class="metric-label">Active Requests</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Recent Campus Services -->
+    <section style="margin-bottom: var(--space-xxl);">
+      <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: var(--space-xs);">
+        <h2>Campus Service Offerings</h2>
+        <a href="/listings.html" class="text-link">Browse all offerings →</a>
+      </div>
+      <p class="meta-secondary">Recent peer skills and tutoring available from students.</p>
+
+      <ul id="recent-listings-list" class="editorial-list">
+        <li class="editorial-list-item"><p class="meta-secondary">Loading offerings...</p></li>
+      </ul>
+    </section>
+
+    <!-- Explore Modules -->
+    <section>
+      <h2>Explore PeerLink</h2>
+      <ul class="explore-grid">
+        <li class="explore-item">
+          <a href="/profile.html">
+            <h3 class="explore-item-title">Profile & Identity</h3>
+            <p class="explore-item-desc">Manage your bio, department, and campus verification status.</p>
+          </a>
+        </li>
+        <li class="explore-item">
+          <a href="/skills.html">
+            <h3 class="explore-item-title">Skills Catalog</h3>
+            <p class="explore-item-desc">Tag your capabilities from programming to academic tutoring.</p>
+          </a>
+        </li>
+        <li class="explore-item">
+          <a href="/listings.html">
+            <h3 class="explore-item-title">Service Offerings</h3>
+            <p class="explore-item-desc">Post a service to assist peers with labs, design, or coursework.</p>
+          </a>
+        </li>
+        <li class="explore-item">
+          <a href="/requests.html">
+            <h3 class="explore-item-title">Requests & Approvals</h3>
+            <p class="explore-item-desc">Manage incoming peer requests and track sent submissions.</p>
+          </a>
+        </li>
+        <li class="explore-item">
+          <a href="/ai.html">
+            <h3 class="explore-item-title">AI Assistant</h3>
+            <p class="explore-item-desc">Natural language matchmaker extension point (Teammate 5).</p>
+          </a>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p>© 2026 PeerLink Platform · University Capstone Prototype</p>
+    </div>
+  </footer>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/dashboard.js"></script>
+</body>
+</html>

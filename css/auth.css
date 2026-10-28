@@ -1,0 +1,73 @@
+/* ============================================================
+   PEERLINK AUTHENTICATION PAGES (LOGIN & REGISTER)
+   Spacious editorial layout without card boxing
+   ============================================================ */
+
+.auth-container {
+  max-width: 440px;
+  margin: var(--space-xl) auto;
+  padding: 0 var(--space-md);
+}
+
+.auth-header {
+  margin-bottom: var(--space-xl);
+}
+
+.auth-title {
+  font-size: 2rem;
+  letter-spacing: -0.03em;
+  margin-bottom: var(--space-xs);
+}
+
+.auth-sub {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+.auth-form {
+  margin-bottom: var(--space-xl);
+}
+
+.auth-footer {
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--border-subtle);
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+.auth-footer a {
+  color: var(--text-primary);
+  font-weight: 500;
+  text-decoration: underline;
+}
+
+.auth-footer a:hover {
+  color: var(--accent);
+}
+
+.field-hint {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+  display: block;
+}
+
+.demo-credentials-note {
+  margin-top: var(--space-lg);
+  padding: var(--space-md);
+  background-color: var(--neutral-subtle);
+  border-radius: var(--radius-md);
+  font-size: 0.825rem;
+  color: var(--text-secondary);
+}
+
+.demo-credentials-note strong {
+  color: var(--text-primary);
+}
+
+.demo-credentials-note code {
+  font-family: var(--font-mono);
+  background: rgba(0, 0, 0, 0.05);
+  padding: 1px 4px;
+  border-radius: 3px;
+}

@@ -1,0 +1,31 @@
+{
+  "name": "peerlink",
+  "version": "1.0.0",
+  "description": "PeerLink - Closed-campus peer-to-peer university platform core prototype",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "dev": "node --watch server/server.js",
+    "test": "node --test tests/auth.test.js tests/profile.test.js tests/listings.test.js tests/requests.test.js tests/database.test.js",
+    "seed": "node server/utils/seedRunner.js"
+  },
+  "keywords": [
+    "peerlink",
+    "campus",
+    "peer-to-peer",
+    "university",
+    "skills",
+    "education"
+  ],
+  "author": "PeerLink Team (Member 1 - Team Lead)",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.9.7"
+  }
+}

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Service Details — PeerLink</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/components.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav id="main-nav" aria-label="Main Navigation"></nav>
+  </header>
+
+  <main class="main-content">
+    <div style="margin-bottom: var(--space-md);">
+      <a href="/listings.html" class="text-link">← Back to all listings</a>
+    </div>
+
+    <article id="listing-container">
+      <header class="page-header">
+        <h1 id="detail-title" class="page-title">Loading service details...</h1>
+        <p id="detail-meta" class="page-description">Category · Skill · Provider</p>
+      </header>
+
+      <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 3rem; margin-top: var(--space-xl);">
+        <div>
+          <h2>About this Offering</h2>
+          <p id="detail-description" style="font-size: 1.05rem; line-height: 1.7; white-space: pre-line;">
+            Loading details...
+          </p>
+
+          <h2 style="font-size: 1.25rem;">Availability & Scheduling</h2>
+          <p id="detail-availability" style="font-size: 1rem; color: var(--text-primary);">
+            -
+          </p>
+
+          <h2 style="font-size: 1.25rem;">Provider Information</h2>
+          <p id="detail-provider-info" style="font-size: 0.95rem; color: var(--text-secondary);">
+            -
+          </p>
+        </div>
+
+        <div>
+          <!-- Request Box -->
+          <div style="background: var(--neutral-surface); border: 1px solid var(--border-subtle); padding: var(--space-lg); border-radius: var(--radius-md);">
+            <h3 style="margin-top: 0; font-size: 1.15rem;">Request Peer Assistance</h3>
+            <p class="meta-secondary">Direct request to this student provider.</p>
+
+            <div id="request-action-area">
+              <form id="submit-request-form">
+                <div class="form-group">
+                  <label for="request-message" class="form-label">Message / Details</label>
+                  <textarea id="request-message" class="form-textarea" placeholder="Explain what you need help with, any upcoming deadlines, or convenient meeting times on campus..." required style="min-height: 120px;"></textarea>
+                </div>
+                <div id="request-feedback" class="form-feedback" role="alert" aria-live="polite"></div>
+                <button type="submit" id="request-submit-btn" class="btn btn-primary btn-block">Send Request →</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p>© 2026 PeerLink Platform · University Capstone Prototype</p>
+    </div>
+  </footer>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      window.auth.enforceAuthGuard();
+      window.auth.updateNavigation('services');
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const listingId = urlParams.get('id');
+
+      if (!listingId) {
+        alert('No listing ID specified.');
+        window.location.href = '/listings.html';
+        return;
+      }
+
+      const currentUser = window.api.getUser();
+      const titleEl = document.getElementById('detail-title');
+      const metaEl = document.getElementById('detail-meta');
+      const descEl = document.getElementById('detail-description');
+      const availEl = document.getElementById('detail-availability');
+      const provEl = document.getElementById('detail-provider-info');
+      const actionArea = document.getElementById('request-action-area');
+      const requestForm = document.getElementById('submit-request-form');
+      const feedbackEl = document.getElementById('request-feedback');
+      const submitBtn = document.getElementById('request-submit-btn');
+
+      try {
+        const res = await window.api.get(`/listings/${listingId}`);
+        const data = res.data;
+
+        titleEl.textContent = data.title;
+        metaEl.textContent = `${data.category_name}${data.skill_name ? ` · ${data.skill_name}` : ''}`;
+        descEl.textContent = data.description;
+        availEl.textContent = data.availability || 'Flexible schedule';
+        provEl.innerHTML = `
+          <strong>${data.provider_name}</strong> (${data.university_id})<br>
+          ${data.provider_department || 'Student'} · Year ${data.provider_year || '1'}
+        `;
+
+        // If current user is the provider, disable requesting self
+        if (Number(data.provider_id) === Number(currentUser.userId)) {
+          actionArea.innerHTML = `
+            <div class="empty-state" style="padding: var(--space-md) 0;">
+              <p class="empty-state-text" style="font-size: 0.95rem;">You are the provider of this offering.</p>
+              <p class="meta-secondary">Incoming student requests for this service will appear in your Requests tab.</p>
+              <a href="/requests.html" class="action-link">View your requests →</a>
+            </div>
+          `;
+        }
+
+        // Handle Request Submission
+        if (requestForm) {
+          requestForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            feedbackEl.textContent = '';
+            feedbackEl.className = 'form-feedback';
+
+            const message = document.getElementById('request-message').value.trim();
+            if (message.length < 10) {
+              feedbackEl.textContent = 'Please write at least 10 characters explaining your request.';
+              feedbackEl.classList.add('feedback-error');
+              return;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending request...';
+
+            try {
+              await window.api.post('/requests', {
+                listing_id: Number(listingId),
+                message
+              });
+
+              feedbackEl.textContent = 'Request sent successfully! Redirecting...';
+              feedbackEl.classList.add('feedback-success');
+
+              setTimeout(() => {
+                window.location.href = '/requests.html';
+              }, 600);
+
+            } catch (err) {
+              feedbackEl.textContent = err.message || 'Failed to submit request.';
+              feedbackEl.classList.add('feedback-error');
+              submitBtn.disabled = false;
+              submitBtn.textContent = 'Send Request →';
+            }
+          });
+        }
+
+      } catch (err) {
+        titleEl.textContent = 'Listing not found';
+        descEl.textContent = err.message || 'Unable to retrieve listing details.';
+      }
+    });
+  </script>
+</body>
+</html>

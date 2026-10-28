@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Service Requests — PeerLink</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/components.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav id="main-nav" aria-label="Main Navigation"></nav>
+  </header>
+
+  <main class="main-content">
+    <header class="page-header">
+      <h1 class="page-title">Service Requests</h1>
+      <p class="page-description">Review student requests for your offerings and track help requests you sent to peers.</p>
+    </header>
+
+    <!-- Incoming Requests -->
+    <section style="margin-bottom: var(--space-xxl);">
+      <h2 style="font-size: 1.25rem; margin-top: 0;">Incoming Requests (As Provider)</h2>
+      <p class="meta-secondary">Peers asking for your assistance. You can accept or decline requests below.</p>
+
+      <ul id="incoming-requests-list" class="editorial-list">
+        <li class="editorial-list-item"><p class="meta-secondary">Loading incoming requests...</p></li>
+      </ul>
+    </section>
+
+    <!-- Outgoing Requests -->
+    <section>
+      <h2 style="font-size: 1.25rem;">Sent Requests (As Requester)</h2>
+      <p class="meta-secondary">Status of requests you sent to other campus peers.</p>
+
+      <ul id="outgoing-requests-list" class="editorial-list">
+        <li class="editorial-list-item"><p class="meta-secondary">Loading sent requests...</p></li>
+      </ul>
+    </section>
+
+    <div style="margin-top: var(--space-xxl); padding-top: var(--space-md); border-top: 1px solid var(--border-subtle);">
+      <p class="meta-secondary">
+        <strong>Architecture Notice:</strong> Service Requests core state machine & database foundation implemented by Member 1 (Lead). Real-time notifications and full lifecycle history will be extended by Member 4.
+      </p>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p>© 2026 PeerLink Platform · University Capstone Prototype</p>
+    </div>
+  </footer>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/requests.js"></script>
+</body>
+</html>

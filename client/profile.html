@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Profile — PeerLink</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/components.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav id="main-nav" aria-label="Main Navigation"></nav>
+  </header>
+
+  <main class="main-content">
+    <header class="page-header" style="display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem;">
+      <div>
+        <h1 id="profile-name" class="page-title">Loading student profile...</h1>
+        <p id="profile-sub" class="page-description">Department · Year</p>
+        <div style="margin-top: 0.5rem; display: flex; gap: 0.5rem; align-items: center;">
+          <span id="profile-uni-id" class="meta-tag">ID: -</span>
+          <span id="profile-verification"></span>
+        </div>
+      </div>
+      <div>
+        <button type="button" id="open-edit-profile-btn" class="btn btn-secondary">Edit Profile</button>
+      </div>
+    </header>
+
+    <!-- Bio Section -->
+    <section style="margin-bottom: var(--space-xl);">
+      <h2 style="margin-top: 0; font-size: 1.15rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em;">About</h2>
+      <p id="profile-bio" style="font-size: 1.05rem; line-height: 1.7; color: var(--text-primary);">
+        Loading student background...
+      </p>
+    </section>
+
+    <!-- Skills Section -->
+    <section style="margin-bottom: var(--space-xl);">
+      <div style="display: flex; justify-content: space-between; align-items: baseline;">
+        <h2 style="font-size: 1.25rem;">Skills & Competencies</h2>
+        <a href="/skills.html" class="text-link">Manage skills →</a>
+      </div>
+      <ul id="profile-skills-list" class="editorial-list">
+        <li class="editorial-list-item"><p class="meta-secondary">Loading skills...</p></li>
+      </ul>
+    </section>
+
+    <!-- Offerings Section -->
+    <section>
+      <div style="display: flex; justify-content: space-between; align-items: baseline;">
+        <h2 style="font-size: 1.25rem;">Active Service Offerings</h2>
+        <a href="/listings.html" class="text-link">Create new offering →</a>
+      </div>
+      <ul id="profile-listings-list" class="editorial-list">
+        <li class="editorial-list-item"><p class="meta-secondary">Loading listings...</p></li>
+      </ul>
+    </section>
+
+    <!-- Edit Profile Native Dialog -->
+    <dialog id="edit-profile-modal">
+      <div class="modal-header">
+        <h3 class="modal-title">Edit Profile Information</h3>
+        <button type="button" id="close-edit-modal-btn" class="modal-close-btn" aria-label="Close">✕</button>
+      </div>
+      <form id="edit-profile-form">
+        <div class="form-group">
+          <label for="edit-name" class="form-label">Full Name</label>
+          <input type="text" id="edit-name" class="form-input" required>
+        </div>
+        <div class="form-group">
+          <label for="edit-department" class="form-label">Department / Field</label>
+          <input type="text" id="edit-department" class="form-input" placeholder="e.g. Computer Science">
+        </div>
+        <div class="form-group">
+          <label for="edit-year" class="form-label">Year of Study</label>
+          <input type="number" id="edit-year" class="form-input" min="1" max="6">
+        </div>
+        <div class="form-group">
+          <label for="edit-bio" class="form-label">Personal Bio</label>
+          <textarea id="edit-bio" class="form-textarea" placeholder="Describe your academic interests, project background, or campus availability..."></textarea>
+        </div>
+        <div id="edit-form-feedback" class="form-feedback" role="alert" aria-live="polite"></div>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-secondary" onclick="document.getElementById('edit-profile-modal').close()">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Changes</button>
+        </div>
+      </form>
+    </dialog>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p>© 2026 PeerLink Platform · University Capstone Prototype</p>
+    </div>
+  </footer>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/profile.js"></script>
+</body>
+</html>

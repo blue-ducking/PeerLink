@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Registration — PeerLink</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/auth.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav id="main-nav" aria-label="Main Navigation"></nav>
+  </header>
+
+  <main class="main-content narrow">
+    <div class="auth-container">
+      <div class="auth-header">
+        <h1 class="auth-title">Create your account</h1>
+        <p class="auth-sub">Register using your University ID to connect with campus peers.</p>
+      </div>
+
+      <form id="register-form" class="auth-form">
+        <div class="form-group">
+          <label for="reg-university-id" class="form-label">University ID</label>
+          <input type="text" id="reg-university-id" class="form-input" placeholder="e.g. STU1006" required autofocus>
+          <span class="field-hint">Must match your campus enrollment identifier.</span>
+        </div>
+
+        <div class="form-group">
+          <label for="reg-name" class="form-label">Full Name</label>
+          <input type="text" id="reg-name" class="form-input" placeholder="e.g. Maya Patel" required>
+        </div>
+
+        <div class="form-group" style="display: grid; grid-template-columns: 2fr 1fr; gap: 1rem;">
+          <div>
+            <label for="reg-dept" class="form-label">Department / Major</label>
+            <input type="text" id="reg-dept" class="form-input" placeholder="e.g. Computer Science">
+          </div>
+          <div>
+            <label for="reg-year" class="form-label">Year of Study</label>
+            <select id="reg-year" class="form-select">
+              <option value="1">1st Year</option>
+              <option value="2">2nd Year</option>
+              <option value="3">3rd Year</option>
+              <option value="4">4th Year</option>
+              <option value="5">Graduate</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="reg-password" class="form-label">Password</label>
+          <input type="password" id="reg-password" class="form-input" placeholder="At least 6 characters" required autocomplete="new-password">
+        </div>
+
+        <div class="form-group">
+          <label for="reg-confirm-password" class="form-label">Confirm Password</label>
+          <input type="password" id="reg-confirm-password" class="form-input" placeholder="Repeat your password" required autocomplete="new-password">
+        </div>
+
+        <div id="register-feedback" class="form-feedback" role="alert" aria-live="polite"></div>
+
+        <button type="submit" id="register-btn" class="btn btn-primary btn-block">Create student account →</button>
+      </form>
+
+      <div class="auth-footer">
+        <p>Already have an account? <a href="/login.html">Sign in here</a></p>
+      </div>
+
+      <div class="demo-credentials-note">
+        <strong>Verification Note:</strong><br>
+        Newly registered accounts begin in <code>PENDING</code> status until verified by campus administration.
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p>© 2026 PeerLink · University Capstone</p>
+    </div>
+  </footer>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      window.auth.redirectIfAlreadyLoggedIn();
+      window.auth.updateNavigation('register');
+
+      const form = document.getElementById('register-form');
+      const feedback = document.getElementById('register-feedback');
+      const btn = document.getElementById('register-btn');
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        feedback.textContent = '';
+        feedback.className = 'form-feedback';
+
+        const university_id = document.getElementById('reg-university-id').value.trim();
+        const name = document.getElementById('reg-name').value.trim();
+        const department = document.getElementById('reg-dept').value.trim();
+        const year = document.getElementById('reg-year').value;
+        const password = document.getElementById('reg-password').value;
+        const confirm = document.getElementById('reg-confirm-password').value;
+
+        if (password !== confirm) {
+          feedback.textContent = 'Passwords do not match.';
+          feedback.classList.add('feedback-error');
+          return;
+        }
+
+        btn.disabled = true;
+        btn.textContent = 'Registering...';
+
+        try {
+          const res = await window.api.post('/auth/register', {
+            university_id,
+            password,
+            name,
+            department,
+            year
+          });
+
+          window.api.setSession(res.data.token, res.data.user);
+
+          feedback.textContent = 'Account created! Redirecting to dashboard...';
+          feedback.classList.add('feedback-success');
+
+          setTimeout(() => {
+            window.location.href = '/dashboard.html';
+          }, 500);
+
+        } catch (err) {
+          feedback.textContent = err.message || 'Registration failed.';
+          feedback.classList.add('feedback-error');
+          btn.disabled = false;
+          btn.textContent = 'Create student account →';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,123 @@
+/* ============================================================
+   PEERLINK DASHBOARD STYLING
+   Workspace feel, spacious typography, activity counters
+   ============================================================ */
+
+.dashboard-hero {
+  margin-bottom: var(--space-xl);
+}
+
+.dashboard-greeting {
+  font-size: 2.25rem;
+  letter-spacing: -0.03em;
+  font-weight: 700;
+  margin-bottom: var(--space-xs);
+}
+
+.dashboard-search-wrap {
+  margin: var(--space-lg) 0 var(--space-xl) 0;
+  position: relative;
+}
+
+.dashboard-search-input {
+  width: 100%;
+  font-size: 1.15rem;
+  padding: 16px 20px;
+  background-color: var(--neutral-surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  font-family: inherit;
+  color: var(--text-primary);
+  transition: all 0.15s ease;
+}
+
+.dashboard-search-input:focus {
+  border-color: var(--border-focus);
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+  outline: none;
+}
+
+/* Activity Metrics */
+.activity-section {
+  margin-bottom: var(--space-xxl);
+}
+
+.activity-heading {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  font-weight: 600;
+  margin-bottom: var(--space-md);
+}
+
+.activity-strip {
+  display: flex;
+  gap: var(--space-xxl);
+  padding: var(--space-lg) 0;
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.activity-metric {
+  display: flex;
+  flex-direction: column;
+}
+
+.metric-number {
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--text-primary);
+  letter-spacing: -0.03em;
+}
+
+.metric-label {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: var(--space-xs);
+}
+
+/* Quick Explore Links */
+.explore-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-md);
+  margin-top: var(--space-md);
+  list-style: none;
+}
+
+.explore-item a {
+  display: block;
+  padding: var(--space-md);
+  background-color: var(--neutral-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  transition: border-color 0.15s ease;
+}
+
+.explore-item a:hover {
+  border-color: var(--border-strong);
+}
+
+.explore-item-title {
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+
+.explore-item-desc {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 0;
+}
+
+@media (max-width: 600px) {
+  .activity-strip {
+    gap: var(--space-lg);
+  }
+  .metric-number {
+    font-size: 2rem;
+  }
+}

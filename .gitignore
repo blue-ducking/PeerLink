@@ -1,0 +1,19 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Environment variables
+.env
+.env.local
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+npm-debug.log*
+
+# Impeccable Local Artifacts
+.impeccable/config.local.json

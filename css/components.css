@@ -1,0 +1,347 @@
+/* ============================================================
+   PEERLINK REUSABLE COMPONENTS
+   Mona Sans typography-first components without boxy containers
+   ============================================================ */
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  padding: 9px 16px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.15s ease;
+  text-decoration: none;
+  line-height: 1.25;
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  color: var(--text-inverse);
+  border-color: var(--primary);
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+  border-color: var(--primary-hover);
+  color: var(--text-inverse);
+}
+
+.btn-secondary {
+  background-color: var(--neutral-surface);
+  color: var(--text-primary);
+  border-color: var(--border-subtle);
+}
+
+.btn-secondary:hover {
+  background-color: var(--neutral-subtle);
+  border-color: var(--border-strong);
+}
+
+.btn-sm {
+  padding: 5px 10px;
+  font-size: 0.8rem;
+}
+
+.btn-block {
+  width: 100%;
+}
+
+.btn-text-danger {
+  background: none;
+  border: none;
+  color: var(--status-rejected);
+  font-size: 0.825rem;
+  cursor: pointer;
+  padding: 4px 6px;
+  border-radius: var(--radius-sm);
+  font-family: inherit;
+}
+
+.btn-text-danger:hover {
+  background-color: var(--status-rejected-bg);
+}
+
+.text-link {
+  color: var(--text-primary);
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.text-link:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+.action-link {
+  display: inline-block;
+  color: var(--accent);
+  font-weight: 500;
+  font-size: 0.9rem;
+  margin-top: var(--space-xs);
+}
+
+.action-link:hover {
+  color: var(--accent-hover);
+  text-decoration: underline;
+}
+
+/* Status Badges */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  letter-spacing: 0.02em;
+}
+
+.badge-verified {
+  color: var(--status-verified);
+  background-color: var(--status-verified-bg);
+  border: 1px solid rgba(22, 101, 52, 0.2);
+}
+
+.badge-pending {
+  color: var(--status-pending);
+  background-color: var(--status-pending-bg);
+  border: 1px solid rgba(133, 77, 14, 0.2);
+}
+
+.badge-rejected {
+  color: var(--status-rejected);
+  background-color: var(--status-rejected-bg);
+  border: 1px solid rgba(153, 27, 27, 0.2);
+}
+
+.meta-tag {
+  display: inline-block;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  background-color: var(--neutral-subtle);
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+}
+
+.meta-secondary {
+  color: var(--text-muted);
+  font-size: 0.825rem;
+}
+
+/* Editorial Lists & Items (Replacing Boxy Cards) */
+.editorial-list {
+  list-style: none;
+  margin-top: var(--space-md);
+  border-top: 1px solid var(--border-subtle);
+}
+
+.editorial-list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-md) 0;
+  border-bottom: 1px solid var(--border-subtle);
+  gap: var(--space-md);
+  transition: background-color 0.1s ease;
+}
+
+.editorial-list-item:hover {
+  background-color: rgba(241, 245, 249, 0.5);
+}
+
+.editorial-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.editorial-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  display: block;
+  margin-bottom: 2px;
+}
+
+.editorial-snippet {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+}
+
+.editorial-meta {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-xs);
+  margin-bottom: 0;
+}
+
+.editorial-action {
+  flex-shrink: 0;
+}
+
+/* Empty State */
+.empty-state {
+  padding: var(--space-xl) 0;
+  text-align: left;
+}
+
+.empty-state-text {
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.empty-state-sub {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: var(--space-sm);
+}
+
+/* Forms */
+.form-group {
+  margin-bottom: var(--space-lg);
+}
+
+.form-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: var(--space-xs);
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+  width: 100%;
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  background-color: var(--neutral-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 10px 12px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  border-color: var(--border-focus);
+  outline: none;
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.form-feedback {
+  margin-top: var(--space-sm);
+  font-size: 0.85rem;
+  min-height: 1.25rem;
+}
+
+.feedback-error,
+.error-inline {
+  color: var(--status-rejected);
+}
+
+.feedback-success {
+  color: var(--status-verified);
+}
+
+/* Native Dialog / Modal Styling */
+dialog {
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  max-width: 540px;
+  width: 90vw;
+  margin: auto;
+  background: var(--neutral-surface);
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.1);
+}
+
+dialog::backdrop {
+  background: rgba(15, 23, 42, 0.4);
+  backdrop-filter: blur(2px);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-lg);
+  padding-bottom: var(--space-xs);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.modal-title {
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+.modal-close-btn {
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  cursor: pointer;
+  color: var(--text-muted);
+}
+
+.modal-close-btn:hover {
+  color: var(--text-primary);
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-sm);
+  margin-top: var(--space-lg);
+}
+
+/* Extension Point Notice Box */
+.extension-notice-box {
+  border: 1px solid var(--border-subtle);
+  background-color: var(--neutral-surface);
+  padding: var(--space-lg);
+  border-radius: var(--radius-md);
+  margin-top: var(--space-md);
+}
+
+.notice-title {
+  font-size: 1.1rem;
+  margin-bottom: var(--space-xs);
+}
+
+.notice-body {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-md);
+}
+
+.notice-meta {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border-subtle);
+  padding-top: var(--space-sm);
+  margin-bottom: var(--space-md);
+}
+
+.notice-fallback-action {
+  padding-top: var(--space-xs);
+}

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Login — PeerLink</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/auth.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav id="main-nav" aria-label="Main Navigation"></nav>
+  </header>
+
+  <main class="main-content narrow">
+    <div class="auth-container">
+      <div class="auth-header">
+        <h1 class="auth-title">Student Login</h1>
+        <p class="auth-sub">Enter your authorized university credentials to access the campus network.</p>
+      </div>
+
+      <form id="login-form" class="auth-form">
+        <div class="form-group">
+          <label for="university-id" class="form-label">University ID</label>
+          <input type="text" id="university-id" class="form-input" placeholder="e.g. STU1001" required autocomplete="username" autofocus>
+        </div>
+
+        <div class="form-group">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" id="password" class="form-input" placeholder="••••••••" required autocomplete="current-password">
+        </div>
+
+        <div id="login-feedback" class="form-feedback" role="alert" aria-live="polite"></div>
+
+        <button type="submit" id="login-btn" class="btn btn-primary btn-block">Sign in to PeerLink →</button>
+      </form>
+
+      <div class="auth-footer">
+        <p>New to campus? <a href="/register.html">Register your student account</a></p>
+      </div>
+
+      <div class="demo-credentials-note">
+        <strong>Demo Accounts (Pre-seeded):</strong><br>
+        Student: <code>STU1001</code> · Password: <code>Password123!</code><br>
+        Admin: <code>ADMIN001</code> · Password: <code>Password123!</code>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p>© 2026 PeerLink · University Capstone</p>
+    </div>
+  </footer>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      window.auth.redirectIfAlreadyLoggedIn();
+      window.auth.updateNavigation('login');
+
+      const form = document.getElementById('login-form');
+      const feedback = document.getElementById('login-feedback');
+      const btn = document.getElementById('login-btn');
+
+      // Check if session expired
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('expired')) {
+        feedback.textContent = 'Session expired. Please log in again.';
+        feedback.classList.add('feedback-error');
+      }
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        feedback.textContent = '';
+        feedback.className = 'form-feedback';
+
+        const university_id = document.getElementById('university-id').value.trim();
+        const password = document.getElementById('password').value;
+
+        btn.disabled = true;
+        btn.textContent = 'Authenticating...';
+
+        try {
+          const res = await window.api.post('/auth/login', { university_id, password });
+          window.api.setSession(res.data.token, res.data.user);
+
+          feedback.textContent = 'Login successful. Redirecting...';
+          feedback.classList.add('feedback-success');
+
+          const redirectUrl = urlParams.get('redirect') ? decodeURIComponent(urlParams.get('redirect')) : '/dashboard.html';
+          setTimeout(() => {
+            window.location.href = redirectUrl;
+          }, 400);
+        } catch (err) {
+          feedback.textContent = err.message || 'Login failed. Please check credentials.';
+          feedback.classList.add('feedback-error');
+          btn.disabled = false;
+          btn.textContent = 'Sign in to PeerLink →';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
